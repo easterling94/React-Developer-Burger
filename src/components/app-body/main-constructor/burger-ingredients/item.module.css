@@ -1,0 +1,28 @@
+.item {
+  width: 240px;
+  padding: 24px 8px;
+  position: relative;
+}
+.counter {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.priceContainer {
+  display: flex;
+  justify-content: center;
+}
+.price {
+  font-family: 'Iceland';
+  font-size: 28px;
+  height: 24px;
+  display: inline;
+  text-align: center;
+  vertical-align: middle;
+}
+.price > svg {
+  padding-left: 8px;
+}
+.name {
+  text-align: center;
+}

@@ -1,0 +1,54 @@
+.header {
+  width: 100%;
+  background-color: #1C1C21;
+}
+.navigation {
+  width: 95%;
+  margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.mode {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.logo {
+  padding: 16px 20px;
+}
+.cabinet {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.element {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 8px;
+  width: 178px;
+  height: 56px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1200px) {
+  .element {
+    width: initial;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .element {
+    padding: 0px 20px;
+    height: initial;
+  }
+  .mode {
+    display: block;
+  }
+  .logo {
+    padding: 0px;
+  }
+}
