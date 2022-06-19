@@ -1,8 +1,8 @@
-import AppHeader from './components/app-header/app-header';
-import AppBody from './components/app-body/app-body'
+import AppHeader from '../app-header/app-header';
+import AppBody from '../app-body/app-body'
 import { useState } from 'react';
-import Ingredients from './utils/data';
-import './app.css';
+import Ingredients from '../../utils/data';
+import styles from './app.css';
 
 const App = () => {
   const [mode, setMode] = useState('constructor');
@@ -12,7 +12,7 @@ const App = () => {
     setMode(mode);
   }
   return (
-    <div className="App">
+    <div className={styles.body}>
       <AppHeader mode={mode} changeMode={changeMode} />
       <AppBody mode={mode} ingredients={ingredients}/>
     </div>
