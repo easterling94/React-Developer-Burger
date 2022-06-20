@@ -4,7 +4,7 @@ import ingredientsPropsTypes from '../../../../prop-types'
 import styles from './burger-constructor.module.css'
 
 const BurgerConstructorList = ({ingredients}) => {
-
+  const ingredientsBunsFiltered = ingredients.filter((el) => el.type !== 'bun');
   return (
     <section className={styles.section}>
       <div className={styles.ingredientsBunUpper}>
@@ -12,7 +12,7 @@ const BurgerConstructorList = ({ingredients}) => {
       </div>
       <div className={styles.ingredientsNotBuns}>
         {
-          ingredients.map((el) => 
+          ingredientsBunsFiltered.map((el) => 
           <div className={styles.ingredient} key={el._id}>
             <DragIcon type='primary'/>
             <ConstructorElement text={el.name} thumbnail={el.image_mobile} price={el.price}/>
@@ -28,9 +28,11 @@ const BurgerConstructorList = ({ingredients}) => {
 }
 
 const BurgerConstructorSummary = ({ingredients}) => {
+  const ingredientsBunsFiltered = ingredients.filter((el) => el.type !== 'bun');
   const totalCostEval = () => {
     let total = 0;
-    ingredients.forEach((el) => total += el.price);
+    ingredientsBunsFiltered.forEach((el) => total += el.price);
+    total += (ingredients[0].price * 2);
     return <span>{total}</span>;
   }
   return (
