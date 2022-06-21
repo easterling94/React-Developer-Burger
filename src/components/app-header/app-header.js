@@ -14,7 +14,7 @@ const HeaderItem = ({id, icon, name, changeMode, type}) => {
 
 const AppHeader = ({mode, changeMode}) => {
 
-  let currentMode = mode;
+  const currentMode = mode;
   const [modeChosen, setModeChosen] = useState({})
   const changeModeF = () => {
     setModeChosen({

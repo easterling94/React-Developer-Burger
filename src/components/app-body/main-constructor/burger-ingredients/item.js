@@ -23,6 +23,9 @@ const IngredientItem = ({item}) => {
   )
 }
 
+IngredientItem.propTypes = {
+  item: PropTypes.object.isRequired
+}
 
 
 export default IngredientItem

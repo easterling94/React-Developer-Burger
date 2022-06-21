@@ -1,5 +1,5 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import Item from './item'
+import IngredientItem from './item'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from './burger-ingredients.module.css'
@@ -35,7 +35,7 @@ const IngredientsType = ({ingredientId, header, ingredients}) => {
       <div className={styles.ingredient}>
         {
           ingredients.map((el) => 
-          <Item key={el._id} item={el}/>)
+          <IngredientItem key={el._id} item={el}/>)
         }
       </div>
     </>
