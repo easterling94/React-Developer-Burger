@@ -1,6 +1,9 @@
 import { CurrencyIcon, Button, ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
 import ingredientsPropsTypes from '../../../../prop-types'
+import OrderDetails from '../../../order-details/order-details'
+import Modal from '../../../modal/modal';
+import { useState } from 'react'
+import PropTypes from 'prop-types'
 import styles from './burger-constructor.module.css'
 
 const BurgerConstructorList = ({ingredients}) => {
@@ -28,6 +31,24 @@ const BurgerConstructorList = ({ingredients}) => {
 }
 
 const BurgerConstructorSummary = ({ingredients}) => {
+
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpened(true);
+  }
+
+  const closeModal = (e) => {
+    if (e === 'Escape' || e.target.id === 'modalOverlay' || e.target.parentElement.id === 'modalCloseBtn' || e.target.parentElement.parentElement.id === 'modalCloseBtn') setIsModalOpened(false);
+    return;
+  }
+
+  const modalDetails = {
+    id: '034536',
+    status: true,
+    message: 'Ваш заказ начали готовить'
+  }
+
   const ingredientsBunsFiltered = ingredients.filter((el) => el.type !== 'bun');
   const totalCostEval = () => {
     let total = 0;
@@ -41,7 +62,12 @@ const BurgerConstructorSummary = ({ingredients}) => {
         {totalCostEval()}
         <CurrencyIcon type='primary' />
       </div>
-      <Button type='primary' size='medium'>Оформить заказ</Button>
+      <Button type='primary' size='medium' onClick={openModal}>Оформить заказ</Button>
+      {isModalOpened && (
+      <Modal closeModal={closeModal}>
+        <OrderDetails data={modalDetails}/>
+      </Modal>
+      )}
     </div>
   )
 }
