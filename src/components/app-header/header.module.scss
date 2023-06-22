@@ -1,0 +1,41 @@
+@mixin flexBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+@mixin link {
+  text-decoration: none;
+}
+.header {
+  margin: 40px;
+  background-color: #1C1C21;
+  width: calc(100% - 80px)
+}
+.nav {
+  @include flexBox();
+  margin: 16px auto;
+  max-width: 1240px;
+  justify-content: space-between;
+  position: relative;
+}
+.leftBlock {
+  @include flexBox();
+}
+.centerBlock {
+  position: absolute;
+  left: calc(50% - 145px);
+}
+.linkPrimary {
+  color: #F2F2F3;
+  @include link();
+}
+.linkSecondary {
+  color: #8585AD;
+  @include link();
+}
+.block {
+  @include flexBox();
+  gap: 8px;
+  padding: 16px 20px;
+}
