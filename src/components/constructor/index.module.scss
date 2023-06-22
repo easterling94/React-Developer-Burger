@@ -1,0 +1,10 @@
+@import '../../assets/styles/styles-vars.scss';
+
+.h1 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+.wrapper {
+  @include flexBox();
+  gap: 40px;
+}
