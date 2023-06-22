@@ -21,9 +21,11 @@
 }
 .leftBlock {
   @include flexBox();
+  gap: 48px;
 }
 .centerBlock {
   position: absolute;
+  height: 50px;
   left: calc(50% - 145px);
 }
 .linkPrimary {
@@ -37,5 +39,5 @@
 .block {
   @include flexBox();
   gap: 8px;
-  padding: 16px 20px;
+  padding: 16px 0px;
 }

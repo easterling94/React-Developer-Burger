@@ -1,11 +1,13 @@
 import { AppHeader } from '../app-header/header';
-import { Main } from '../main/main';
+import { Constructor } from '../constructor';
 import styles from './app.module.css';
 function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Main></Main>
+      <main className={styles.main}>
+        <Constructor />
+      </main>
     </div>
   );
 }

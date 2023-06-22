@@ -22,14 +22,13 @@ export const AppHeader = () => {
 }
 
 function HeaderTab ({title, icon, type}) {
-  const MyComponent = icon
+  const MyComponent = icon;
   return (
     <a href='/' className={type === TYPE[0] ? styles.linkPrimary : styles.linkSecondary}>
       <div className={styles.block}>
         <MyComponent type={type}/>
         {title}
       </div>
-      
     </a>    
   )
 }
