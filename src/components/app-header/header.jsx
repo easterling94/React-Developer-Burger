@@ -1,4 +1,5 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
 import styles from './header.module.scss'
 
 const TYPE = ['primary', 'secondary', 'error', 'success']
@@ -31,4 +32,10 @@ function HeaderTab ({title, icon, type}) {
       </div>
     </a>    
   )
+}
+
+HeaderTab.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
+  type: PropTypes.string.isRequired,
 }

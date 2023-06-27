@@ -1,4 +1,6 @@
 import { Tab, Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
+import { ingredientsPropsTypes } from '../../utils/prop-types'
 import { useState } from 'react'
 import data from '../../utils/data.json'
 import styles from './burger-ingredients.module.scss'
@@ -82,4 +84,13 @@ function Item ({item}) {
       </p>
     </div>
   )
+}
+
+ItemsList.propTypes = {
+  name: PropTypes.string.isRequired,
+  ingredients: PropTypes.arrayOf(ingredientsPropsTypes.isRequired).isRequired,
+}
+
+Item.propTypes = {
+  item: PropTypes.shape(ingredientsPropsTypes.isRequired).isRequired,
 }

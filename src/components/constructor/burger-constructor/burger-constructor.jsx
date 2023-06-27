@@ -1,4 +1,5 @@
 import { ConstructorElement, Button, CurrencyIcon, DragIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
 import data from '../../utils/data.json'
 import styles from './burger-constructor.module.scss'
 
@@ -40,14 +41,19 @@ function Item({item, type, i}) {
         : null
       }
       <ConstructorElement 
-      text={item.name}
-      thumbnail={item.image_mobile}
-      price={item.price}
-      type={type}
-      isLocked={item.type === 'bun' ? true : false}
-      handleClose={() => console.log(i)}
-    />
+        text={item.name}
+        thumbnail={item.image_mobile}
+        price={item.price}
+        type={type}
+        isLocked={item.type === 'bun' ? true : false}
+        handleClose={() => console.log(i)}
+      />
     </div>
-    
   )
+}
+
+Item.propTypes = {
+  item: PropTypes.object.isRequired,
+  type: PropTypes.string,
+  i: PropTypes.number.isRequired,
 }
