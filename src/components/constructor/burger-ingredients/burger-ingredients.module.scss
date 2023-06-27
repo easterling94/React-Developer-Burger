@@ -1,0 +1,70 @@
+@import '../../../assets/styles/styles-vars.scss';
+.section {
+  width: 600px;
+}
+.nav {
+  @include flexBox();
+  margin-bottom: 40px;
+}
+.itemsList {
+  height: 50vh;
+  overflow-y: scroll;
+}
+.itemsList::-webkit-scrollbar {
+  width: 8px;
+}
+.itemsList::-webkit-scrollbar-track {
+  background-color: #2F2F37;
+  margin-bottom: 50px;
+}
+.itemsList::-webkit-scrollbar-thumb{
+  background-color: #8585AD;
+}
+.list {
+  margin-bottom: 40px;
+}
+.h2 {
+  margin: 0px;
+  width: 100%;
+}
+.wrapper {
+  @include flexBox();
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: start;
+  margin: 0px 16px;
+}
+.item {
+  @include flexBox();
+  flex-direction: column;
+  width: 240px;
+  padding: 24px 8px;
+  position: relative;
+}
+.counter {
+  position: absolute;
+  top: 0;
+  right:0;
+}
+.img {
+  cursor: pointer;
+}
+.price {
+  text-align: center;
+  font-size: 28px;
+  font-family: Iceland;
+  line-height: 24px;
+  margin: 4px auto;
+}
+.price > span {
+  vertical-align: middle;
+}
+.price > svg {
+  padding-left: 8px;
+  vertical-align: middle;
+}
+.name {
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+}

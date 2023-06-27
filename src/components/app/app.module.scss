@@ -1,0 +1,10 @@
+@import '../../assets/styles/styles-vars.scss';
+
+.app {
+  @include flexBox();
+  flex-direction: column;
+}
+.main {
+  width: 1240px;
+  margin: 0px auto;
+}

@@ -1,3 +1,10 @@
+@import './assets/styles/styles-vars.scss';
+@mixin flexBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 @font-face {
   src: url(../src/assets/fonts/JetBrainsMono-Regular.woff2) format('woff2');
   font-family: 'Jet Brains Mono';
@@ -39,12 +46,11 @@
   font-weight: normal;
   font-display: swap;
 }
-
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #131316;
   color: #F2F2F3;
-  font-family: 'Jet Brains Mono', Arial, sans-serif;
+  font-family: $fontJetBrainsMono, Arial, sans-serif;
 }
