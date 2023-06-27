@@ -1,4 +1,4 @@
-import { AppHeader } from '../app-header/header';
+import { AppHeader } from '../app-header/app-header';
 import { ConstructorIndex } from '../constructor';
 import styles from './app.module.scss';
 function App() {

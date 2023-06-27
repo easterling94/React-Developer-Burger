@@ -1,15 +1,16 @@
-import { ConstructorElement, Button, CurrencyIcon, DragIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
+import { Button, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Item } from './item'
+import { useCallback } from 'react'
 import data from '../../utils/data.json'
 import styles from './burger-constructor.module.scss'
 
 export const BurgerConstructor = () => {
-  const totalCostEval = () => {
+
+  const totalCostEval = useCallback(() => {
     return data.reduce((acc, current) => acc + current.price, 0)
-  }
-  const handleOrder = () => {
-    console.log('Заказ оформляется')
-  }
+  }, [data])
+
+  const handleOrder = () => {}
   return (
     <section className={styles.section}>
       <div className={styles.constructor}>
@@ -30,30 +31,4 @@ export const BurgerConstructor = () => {
       </div>
     </section>
   )
-}
-
-function Item({item, type, i}) {
-  return (
-    <div className={styles.item}>
-      {
-        item.type !== 'bun' ? 
-        <DragIcon type='primary'/>
-        : null
-      }
-      <ConstructorElement 
-        text={item.name}
-        thumbnail={item.image_mobile}
-        price={item.price}
-        type={type}
-        isLocked={item.type === 'bun' ? true : false}
-        handleClose={() => console.log(i)}
-      />
-    </div>
-  )
-}
-
-Item.propTypes = {
-  item: PropTypes.object.isRequired,
-  type: PropTypes.string,
-  i: PropTypes.number.isRequired,
 }
