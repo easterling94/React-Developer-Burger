@@ -1,6 +1,6 @@
 import { ConstructorElement, Button, CurrencyIcon, DragIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
-import { ingredientsPropsTypes } from '../../utils/prop-types'
+import { ingredientsPropsTypes } from '../../../utils/prop-types'
 import styles from './burger-constructor.module.scss'
 
 export const Item = ({item, type, i}) => {

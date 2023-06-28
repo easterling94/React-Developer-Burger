@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { TYPE } from '../utils/consts'
+import { TYPE } from '../../utils/consts'
 import styles from './header.module.scss'
 
 export const HeaderTab = ({title, icon, type}) => {

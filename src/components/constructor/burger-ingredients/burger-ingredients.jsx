@@ -1,17 +1,17 @@
+import PropTypes from 'prop-types'
+import { ingredientsPropsTypes } from '../../../utils/prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { INGREDIENTS_TYPES } from '../../utils/consts'
+import { INGREDIENTS_TYPES } from '../../../utils/consts'
 import { ItemsList } from './items-list'
-
 import { useState, useMemo } from 'react'
-import data from '../../utils/data.json'
 import styles from './burger-ingredients.module.scss'
 
-export const BurgerIngredients = () => {
+export const BurgerIngredients = ({ingredients}) => {
   const [current, setCurrent] = useState(INGREDIENTS_TYPES[0].type);
 
-  const BUNS = useMemo(() => data.filter(el => el.type === INGREDIENTS_TYPES[0].type), [data]);
-  const MAIN = useMemo(() => data.filter(el => el.type === INGREDIENTS_TYPES[1].type), [data]);
-  const SAUCE = useMemo(() => data.filter(el => el.type === INGREDIENTS_TYPES[2].type), [data]);
+  const BUNS = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[0].type), [ingredients]);
+  const MAIN = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[1].type), [ingredients]);
+  const SAUCE = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[2].type), [ingredients]);
 
   return (
     <section className={styles.section} >
@@ -33,4 +33,8 @@ export const BurgerIngredients = () => {
       </div>
     </section>
   )
+}
+
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientsPropsTypes.isRequired).isRequired
 }

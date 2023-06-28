@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { ingredientsPropsTypes } from '../../utils/prop-types'
+import { ingredientsPropsTypes } from '../../../utils/prop-types'
 import { Item } from './item'
 import styles from './burger-ingredients.module.scss'
 

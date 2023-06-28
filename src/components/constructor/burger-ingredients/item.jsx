@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { ingredientsPropsTypes } from '../../utils/prop-types'
+import { ingredientsPropsTypes } from '../../../utils/prop-types'
 import { useState } from 'react'
 import { Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredients.module.scss'

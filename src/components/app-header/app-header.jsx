@@ -1,6 +1,6 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { HeaderTab } from './header-tab'
-import { TYPE } from '../utils/consts'
+import { TYPE } from '../../utils/consts'
 import styles from './header.module.scss'
 
 const ICON = [BurgerIcon, ListIcon, ProfileIcon]
