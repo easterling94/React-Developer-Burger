@@ -1,0 +1,22 @@
+.card {
+  width: 520px;
+  margin: 50px auto;
+}
+.header {
+  text-align: center;
+}
+.img {
+  width: 420px;
+  margin: 0px auto;
+}
+.name {
+  text-align: center;
+}
+.section {
+  display: flex;
+  justify-content: space-between;
+}
+.nutritionItem > * {
+  text-align: center;
+  color: #8585AD;
+}

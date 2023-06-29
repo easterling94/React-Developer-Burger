@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import { ingredientsPropsTypes } from '../../../utils/prop-types'
+import { ingredientsPropsTypesArray } from '../../../utils/prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { INGREDIENTS_TYPES } from '../../../utils/consts'
 import { ItemsList } from './items-list'
@@ -36,5 +35,5 @@ export const BurgerIngredients = ({ingredients}) => {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsPropsTypes.isRequired).isRequired
+  ingredients: ingredientsPropsTypesArray
 }

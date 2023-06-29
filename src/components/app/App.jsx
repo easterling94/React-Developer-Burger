@@ -27,7 +27,7 @@ function App() {
   }, []);
   return (
     <div className={styles.app}>
-      {ingredients !== null && data === 'success' ? (
+      {ingredients && data === 'success' ? (
         <>
           <AppHeader />
           <main className={styles.main}>

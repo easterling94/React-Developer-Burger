@@ -1,17 +1,35 @@
-import PropTypes from 'prop-types'
-import { ingredientsPropsTypes } from '../../../utils/prop-types'
+import { ingredientsPropsTypesArray } from '../../../utils/prop-types'
 import { Button, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Item } from './item'
-import { useCallback } from 'react'
+import { OrderDetails } from '../../modal/order/order'
+import { OrderLoader } from '../../modal/order/order-loader'
+import { useState, useCallback } from 'react'
 import styles from './burger-constructor.module.scss'
+import { Modal } from '../../modal'
 
 export const BurgerConstructor = ({ingredients}) => {
+  const [isLoadingToServer, setIsLoadingToServer] = useState(false)
+  const [orderSendSuccess, setOrderSetSuccess] = useState(false);
+
+  const closeModalState = () => {
+    setIsLoadingToServer(false)
+    setOrderSetSuccess(false)
+  }
 
   const totalCostEval = useCallback(() => {
     return ingredients.reduce((acc, current) => acc + current.price, 0)
   }, [ingredients])
 
-  const handleOrder = () => {}
+  const sendOrderToServer = async () => {
+    setIsLoadingToServer(true)
+    const waitForServerResponse = async () => {
+      setTimeout(() => {
+        setIsLoadingToServer(false);
+        setOrderSetSuccess(true)
+      }, 2000)
+    }
+    await waitForServerResponse();
+  }
   return (
     <section className={styles.section}>
       <div className={styles.constructor}>
@@ -28,12 +46,24 @@ export const BurgerConstructor = ({ingredients}) => {
           <span>{totalCostEval()}</span>
           <CurrencyIcon type='primary' />
         </div>
-        <Button type='primary' size='medium' onClick={handleOrder} htmlType='button'>Оформить заказ</Button>
+        <Button type='primary' size='medium' onClick={sendOrderToServer} htmlType='button'>Оформить заказ</Button>
+        {
+          isLoadingToServer? 
+          <Modal closeModal={closeModalState}>
+            <OrderLoader />
+          </Modal>
+          : 
+          orderSendSuccess ? 
+          <Modal closeModal={closeModalState}>
+            <OrderDetails />
+          </Modal>
+          : null
+        }
       </div>
     </section>
   )
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsPropsTypes.isRequired).isRequired
+  ingredients: ingredientsPropsTypesArray
 }
