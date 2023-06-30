@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { ingredientsPropsTypes } from '../../../utils/prop-types'
 import styles from './ingredient.module.css'
 
@@ -34,5 +33,5 @@ export const ModalIngredients = ({item}) => {
 
 
 ModalIngredients.propTypes = {
-  item: PropTypes.shape(ingredientsPropsTypes.isRequired).isRequired,
+  item: ingredientsPropsTypes.isRequired,
 }

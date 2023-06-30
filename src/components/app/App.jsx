@@ -2,7 +2,8 @@ import { AppHeader } from '../app-header/app-header';
 import { Error } from '../error/error';
 import { Loader } from '../loader/loader';
 import { ConstructorIndex } from '../constructor';
-import { API, getData, FETCH_ERROR } from '../../utils/api';
+import { getData } from '../../utils/api';
+import { API, SERVER_RESPONSE_TYPES } from '../../utils/consts';
 import { useEffect, useState } from 'react';
 import styles from './app.module.scss';
 
@@ -13,10 +14,10 @@ function App() {
   useEffect(() => {
     const getIngredients = async () => {
       const result = await getData(API);
-      if (result === FETCH_ERROR) {
-        setData('error');
+      if (result === SERVER_RESPONSE_TYPES.error) {
+        setData(SERVER_RESPONSE_TYPES.error);
       } else {
-        setData('success');
+        setData(SERVER_RESPONSE_TYPES.success);
         setIngredients(result.data);
       }
     };
@@ -27,14 +28,14 @@ function App() {
   }, []);
   return (
     <div className={styles.app}>
-      {ingredients && data === 'success' ? (
+      {ingredients && data === SERVER_RESPONSE_TYPES.success ? (
         <>
           <AppHeader />
           <main className={styles.main}>
             <ConstructorIndex ingredients={ingredients} />
           </main>
         </>
-      ) : data === 'error' ? (
+      ) : data === SERVER_RESPONSE_TYPES.error ? (
         <>
           <Error />
         </>

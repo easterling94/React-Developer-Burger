@@ -1,9 +1,9 @@
-import { ConstructorElement, Button, CurrencyIcon, DragIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
+import { ConstructorElement, DragIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 import { ingredientsPropsTypes } from '../../../utils/prop-types'
 import styles from './burger-constructor.module.scss'
 
-export const Item = ({item, type, i}) => {
+export const Item = ({item, type}) => {
   const handleClose = () => {}
   return (
     <div className={styles.item}>
@@ -25,7 +25,6 @@ export const Item = ({item, type, i}) => {
 }
 
 Item.propTypes = {
-  item: PropTypes.shape(ingredientsPropsTypes.isRequired).isRequired,
+  item: ingredientsPropsTypes.isRequired,
   type: PropTypes.string,
-  i: PropTypes.number.isRequired,
 }

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { ingredientsPropsTypes } from '../../../utils/prop-types'
 import { useState } from 'react'
 import { Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -41,5 +40,5 @@ export const Item = ({item}) => {
 }
 
 Item.propTypes = {
-  item: PropTypes.shape(ingredientsPropsTypes.isRequired).isRequired,
+  item: ingredientsPropsTypes.isRequired,
 }

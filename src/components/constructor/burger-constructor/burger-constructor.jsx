@@ -3,7 +3,7 @@ import { Button, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-c
 import { Item } from './item'
 import { OrderDetails } from '../../modal/order/order'
 import { OrderLoader } from '../../modal/order/order-loader'
-import { useState, useCallback } from 'react'
+import { useState, useMemo } from 'react'
 import styles from './burger-constructor.module.scss'
 import { Modal } from '../../modal'
 
@@ -16,7 +16,7 @@ export const BurgerConstructor = ({ingredients}) => {
     setOrderSetSuccess(false)
   }
 
-  const totalCostEval = useCallback(() => {
+  const totalCostEval = useMemo(() => {
     return ingredients.reduce((acc, current) => acc + current.price, 0)
   }, [ingredients])
 
@@ -43,7 +43,7 @@ export const BurgerConstructor = ({ingredients}) => {
       </div>
       <div className={styles.summary}>
         <div className={styles.costs}>
-          <span>{totalCostEval()}</span>
+          <span>{totalCostEval}</span>
           <CurrencyIcon type='primary' />
         </div>
         <Button type='primary' size='medium' onClick={sendOrderToServer} htmlType='button'>Оформить заказ</Button>

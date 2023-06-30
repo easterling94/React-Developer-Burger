@@ -1,7 +1,6 @@
 import { BurgerIngredients } from './burger-ingredients/burger-ingredients'
 import { BurgerConstructor } from './burger-constructor/burger-constructor'
-import PropTypes from 'prop-types'
-import { ingredientsPropsTypes } from '../../utils/prop-types'
+import { ingredientsPropsTypesArray } from '../../utils/prop-types'
 import styles from './index.module.scss'
 
 export const ConstructorIndex = ({ingredients}) => {
@@ -17,5 +16,5 @@ export const ConstructorIndex = ({ingredients}) => {
 }
 
 ConstructorIndex.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsPropsTypes.isRequired).isRequired
+  ingredients: ingredientsPropsTypesArray
 }

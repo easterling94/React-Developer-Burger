@@ -1,5 +1,4 @@
-export const API = 'https://norma.nomoreparties.space/api/ingredients';
-export const FETCH_ERROR = 'error';
+import { SERVER_RESPONSE_TYPES } from './consts';
 
 export const getData = async (url : string) => {
   const result = await fetch(url)
@@ -7,12 +6,11 @@ export const getData = async (url : string) => {
     if(data && data.ok) {
       return data.json();
     }
-    return FETCH_ERROR
+    return SERVER_RESPONSE_TYPES.error
   })
-  .catch(error => {
+  .catch(() => {
     alert('Возможно, сервер недоступен, попробуйте еще раз')
-    console.log(error)
-    return FETCH_ERROR;
+    return SERVER_RESPONSE_TYPES.error;
   })
   return result
 }

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { ingredientsPropsTypes } from '../../../utils/prop-types'
+import { ingredientsPropsTypesArray } from '../../../utils/prop-types'
 import { Item } from './item'
 import styles from './burger-ingredients.module.scss'
 
@@ -22,5 +22,5 @@ export const ItemsList = ({name, ingredients}) => {
 
 ItemsList.propTypes = {
   name: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(ingredientsPropsTypes.isRequired).isRequired,
+  ingredients: ingredientsPropsTypesArray,
 }

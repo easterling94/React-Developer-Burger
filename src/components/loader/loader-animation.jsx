@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react';
-import styles from './jumping-dots.module.scss'
+import styles from './loader-animation.module.scss'
 
-export const JumpingDots = () => {
+export const LoaderAnimation = () => {
   const [dotToMove, setDotToMove] = useState(true);
-  const [animation, setAnimation] = useState(true);
-
   useEffect(() => {
-    if (!animation) return;
     setTimeout(() => {
       setDotToMove(!dotToMove);
     }, 200);
-  }, [dotToMove, animation]);
+  }, [dotToMove]);
   return (
     <>
       <div className={styles.wrapper}>
