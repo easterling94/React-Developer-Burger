@@ -9,7 +9,7 @@ export const ConstructorIndex = ({ingredients}) => {
       <h1 className={styles.h1}>Соберите бургер</h1>
       <div className={styles.wrapper}>
         <BurgerIngredients ingredients={ingredients}/>
-        <BurgerConstructor ingredients={ingredients}/>
+        <BurgerConstructor />
       </div>
     </>
   )

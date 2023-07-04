@@ -16,3 +16,11 @@ export const ingredientsPropsTypes = PropTypes.shape({
 });
 
 export const ingredientsPropsTypesArray = PropTypes.arrayOf(ingredientsPropsTypes.isRequired).isRequired
+
+export const serverResponseOnOrder = PropTypes.shape({
+  success: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  order: PropTypes.shape({
+    number: PropTypes.number.isRequired
+  })
+})

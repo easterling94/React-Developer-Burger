@@ -2,7 +2,7 @@ export const ICON_TYPES = {
   primary: 'primary',
   secondary: 'secondary',
   error: 'error',
-  success: 'success',
+  success: 'success'
 };
 export const INGREDIENTS_TYPES = [
   {
@@ -18,10 +18,8 @@ export const INGREDIENTS_TYPES = [
     name: 'Соусы'
   }
 ]
-export const SERVER_RESPONSE_TYPES = {
-  processing: 'processing',
-  error: 'error',
-  success: 'success',
+export const CONSTRUCTOR_ITEM_POSITIONS = {
+  top: 'top',
+  bottom: 'bottom',
+  notBun: 'notBun'
 }
-
-export const API = 'https://norma.nomoreparties.space/api/ingredients';
