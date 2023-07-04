@@ -6,22 +6,20 @@ import PropTypes from 'prop-types'
 
 const modalId = document.getElementById('modal');
 
-export const Modal = ({closeModal, children}) => {
-  return ReactDOM.createPortal(
-      <ModalOverlay closeModal={closeModal}>
-        <div className={styles.modal}>
-          <div className={styles.wrapper}> 
-            <div id='modalCloseBtn' className={styles.closeBtn} >
-              <CloseIcon type="primary" onClick={(e) => closeModal(e)} />
-            </div>
-            {children}
+export const Modal = ({closeModal, children}) => ReactDOM.createPortal(
+    <ModalOverlay closeModal={closeModal}>
+      <div className={styles.modal}>
+        <div className={styles.wrapper}> 
+          <div id='modalCloseBtn' className={styles.closeBtn} >
+            <CloseIcon type="primary" onClick={(e) => closeModal(e)} />
           </div>
+          {children}
         </div>
-      </ModalOverlay>
-    ,
-    modalId
-  )
-}
+      </div>
+    </ModalOverlay>
+  ,
+  modalId
+)
 
 Modal.propTypes = {
   children: PropTypes.element.isRequired,
