@@ -2,7 +2,7 @@ import { AppHeader } from '../app-header/app-header';
 import { Error } from '../error/error';
 import { Loader } from '../loader/loader';
 import { ConstructorIndex } from '../constructor';
-import { getData } from '../../utils/api';
+import { getDataAPI } from '../../utils/api';
 import { BASE_URL_INGREDIENTS, SERVER_RESPONSE_TYPES } from '../../utils/api';
 import { AppContext } from '../../utils/appContext';
 import { useEffect, useState } from 'react';
@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     const getIngredients = async () => {
-      const result = await getData(BASE_URL_INGREDIENTS);
+      const result = await getDataAPI(BASE_URL_INGREDIENTS);
       if (result.success) {
         setIngredients(result.data)
         setIngredientsForConstructor(result.data)

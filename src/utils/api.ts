@@ -21,14 +21,14 @@ const checkResponse = async (data: Response) => {
   return SERVER_RESPONSE_TYPES.error.invalid_endpoint
 }
 
-export const getData = async (url : string) => {
+export const getDataAPI = async (url : string) => {
   const result = await fetch(url)
     .then(checkResponse)
     .catch(handleNetworkError)
   return result
 }
 
-export const sendOrder = async (order: Array<string>) => {
+export const sendOrderAPI = async (order: Array<string>) => {
   const data = await fetch(BASE_URL_ORDERS, {
     method: 'POST',
     headers: {

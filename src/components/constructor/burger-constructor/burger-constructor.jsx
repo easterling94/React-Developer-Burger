@@ -3,7 +3,7 @@ import { Item } from './item'
 import { OrderDetails } from '../../modal/order/order'
 import { OrderLoader } from '../../modal/order/order-loader'
 import { useState, useMemo, useContext, useEffect } from 'react'
-import { sendOrder } from '../../../utils/api'
+import { sendOrderAPI } from '../../../utils/api'
 import { Modal } from '../../modal'
 import { AppContext } from '../../../utils/appContext'
 import { CONSTRUCTOR_ITEM_POSITIONS } from '../../../utils/consts'
@@ -51,7 +51,7 @@ export const BurgerConstructor = () => {
     const orderIDS = ingredientsForConstructor.map(el => el._id)
     setIsLoadingToServer(true)
     const waitForServerResponse = async () => {
-      setOrderDetails(await sendOrder(orderIDS))
+      setOrderDetails(await sendOrderAPI(orderIDS))
       setTimeout(() => {
         setIsLoadingToServer(false);
         setOrderSetSuccess(true)
