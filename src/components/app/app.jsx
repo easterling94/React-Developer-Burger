@@ -6,14 +6,18 @@ import { getDataAPI } from '../../utils/api';
 import { BASE_URL_INGREDIENTS, SERVER_RESPONSE_TYPES } from '../../utils/api';
 import { AppContext } from '../../utils/appContext';
 import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import enhancer from '../../store/enhancers/loggerEnhancer'
 import styles from './app.module.scss';
 
 function App() {
+  const dispatch = useAppDispatch(); 
   const [response, setResponse] = useState(null);
   const [ingredients, setIngredients] = useState(null);
   const [ingredientsForConstructor, setIngredientsForConstructor] = useState(null);
 
   useEffect(() => {
+    dispatch(enhancer())
     const getIngredients = async () => {
       const result = await getDataAPI(BASE_URL_INGREDIENTS);
       if (result.success) {

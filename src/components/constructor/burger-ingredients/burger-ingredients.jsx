@@ -2,11 +2,18 @@ import { ingredientsPropsTypesArray } from '../../../utils/prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { INGREDIENTS_TYPES } from '../../../utils/consts'
 import { ItemsList } from './items-list'
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../store/store'
+import { switchIngredientsTabEnhancer, scrollToView } from '../../../store/enhancers/switchIngredientsTab'
 import styles from './burger-ingredients.module.scss'
 
 export const BurgerIngredients = ({ingredients}) => {
-  const [current, setCurrent] = useState(INGREDIENTS_TYPES[0].type);
+  const dispatch = useAppDispatch();
+  const ingredientsTab = useAppSelector(store => store.ingredients.ingredientsTab);
+
+  const changeView = () => {
+    dispatch(switchIngredientsTabEnhancer(ingredientsTab))
+  }
 
   const BUNS = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[0].type), [ingredients]);
   const MAIN = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[1].type), [ingredients]);
@@ -14,21 +21,21 @@ export const BurgerIngredients = ({ingredients}) => {
 
   return (
     <section className={styles.section} >
-      <nav className={styles.nav}>
-        <Tab value={INGREDIENTS_TYPES[0].type} active={current === INGREDIENTS_TYPES[0].type} onClick={() => setCurrent(INGREDIENTS_TYPES[0].type)}>
+      <nav className={styles.nav} id='nav'>
+        <Tab value={INGREDIENTS_TYPES[0].type} active={ingredientsTab === INGREDIENTS_TYPES[0].type} onClick={() => scrollToView(INGREDIENTS_TYPES[0].type)}>
         {INGREDIENTS_TYPES[0].name}
         </Tab>
-        <Tab value={INGREDIENTS_TYPES[1].type} active={current === INGREDIENTS_TYPES[1].type} onClick={() => setCurrent(INGREDIENTS_TYPES[1].type)}>
+        <Tab value={INGREDIENTS_TYPES[1].type} active={ingredientsTab === INGREDIENTS_TYPES[1].type} onClick={() => scrollToView(INGREDIENTS_TYPES[1].type)}>
         {INGREDIENTS_TYPES[1].name}
         </Tab>
-        <Tab value={INGREDIENTS_TYPES[2].type} active={current === INGREDIENTS_TYPES[2].type} onClick={() => setCurrent(INGREDIENTS_TYPES[2].type)}>
+        <Tab value={INGREDIENTS_TYPES[2].type} active={ingredientsTab === INGREDIENTS_TYPES[2].type} onClick={() => scrollToView(INGREDIENTS_TYPES[2].type)}>
         {INGREDIENTS_TYPES[2].name}
         </Tab>
       </nav>
-      <div className={styles.itemsList}>
-        <ItemsList name={INGREDIENTS_TYPES[0].name} ingredients={BUNS}/>
-        <ItemsList name={INGREDIENTS_TYPES[1].name} ingredients={MAIN}/>
-        <ItemsList name={INGREDIENTS_TYPES[2].name} ingredients={SAUCE}/>
+      <div className={styles.itemsList} onScroll={changeView}>
+        <ItemsList id='bun' name={INGREDIENTS_TYPES[0].name} ingredients={BUNS}/>
+        <ItemsList id='main' name={INGREDIENTS_TYPES[1].name} ingredients={MAIN}/>
+        <ItemsList id='sauce' name={INGREDIENTS_TYPES[2].name} ingredients={SAUCE}/>
       </div>
     </section>
   )

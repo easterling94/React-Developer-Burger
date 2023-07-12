@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
+export type ingredientsTab = 'bun' | 'main' | 'sauce'
+
 export interface Ingretient {
   _id: string,
   name: string,
-  type: 'bun' | 'main' | 'sauce',
+  type: ingredientsTab,
   proteins: number,
   fat: number,
   carbohydrates: number,
@@ -16,8 +18,11 @@ export interface Ingretient {
   __v: number
 }
 
+
+
 export interface IngredientsState {
   ingredients: Array<Ingretient> | null;
+  ingredientsTab: ingredientsTab,
   requestIngredientsFetched: boolean;
   requestIngredientsSuccess: boolean;
   requestIngredientsFailed: boolean;
@@ -26,6 +31,7 @@ export interface IngredientsState {
 
 const initialState: IngredientsState = {
   ingredients: null,
+  ingredientsTab: 'bun',
   requestIngredientsFetched: false,
   requestIngredientsSuccess: false,
   requestIngredientsFailed: false,
@@ -46,11 +52,14 @@ export const ingredientsSlice = createSlice({
     requestIngredientsError: (state) => {
       state.requestIngredientsFailed = true;
     },
+    switchIngredientsTab: (state, action: PayloadAction<ingredientsTab>) => {
+      state.ingredientsTab = action.payload;
+    }
   }
 })
 
 const { actions, reducer } = ingredientsSlice;
 
-export const { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError} = actions
+export const { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError, switchIngredientsTab} = actions
 
 export default reducer

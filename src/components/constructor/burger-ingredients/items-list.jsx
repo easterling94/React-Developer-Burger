@@ -3,10 +3,10 @@ import { ingredientsPropsTypesArray } from '../../../utils/prop-types'
 import { Item } from './item'
 import styles from './burger-ingredients.module.scss'
 
-export const ItemsList = ({name, ingredients}) => (
+export const ItemsList = ({name, ingredients, id}) => (
   <div className={styles.list}>
     <h2 className={styles.h2}>{name}</h2>
-    <div className={styles.wrapper}>
+    <div id={id} className={styles.wrapper}>
       {
         ingredients.map(item => {
           return (
@@ -21,4 +21,5 @@ export const ItemsList = ({name, ingredients}) => (
 ItemsList.propTypes = {
   name: PropTypes.string.isRequired,
   ingredients: ingredientsPropsTypesArray,
+  id: PropTypes.string.isRequired,
 }
