@@ -3,7 +3,7 @@ import { serverResponseOnOrder } from '../../../utils/prop-types';
 
 export const OrderDetails = ({orderDetails}) => (
   <div className={styles.card} onClick={(e) => e.stopPropagation()}>
-    <h1 className={styles.id}>{orderDetails.order.number}</h1>
+    <h1 className={styles.id}>{orderDetails}</h1>
     <div className={styles.title}>идентификатор заказа</div>
     <div className={styles.status}>
       <div className={styles.statusWrapper}>

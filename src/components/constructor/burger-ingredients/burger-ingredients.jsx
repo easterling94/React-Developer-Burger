@@ -1,4 +1,3 @@
-import { ingredientsPropsTypesArray } from '../../../utils/prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { INGREDIENTS_TYPES } from '../../../utils/consts'
 import { ItemsList } from './items-list'
@@ -7,9 +6,9 @@ import { useAppDispatch, useAppSelector } from '../../../store/store'
 import { switchIngredientsTabEnhancer, scrollToView } from '../../../store/enhancers/switchIngredientsTab'
 import styles from './burger-ingredients.module.scss'
 
-export const BurgerIngredients = ({ingredients}) => {
+export const BurgerIngredients = () => {
   const dispatch = useAppDispatch();
-  const ingredientsTab = useAppSelector(store => store.ingredients.ingredientsTab);
+  const { ingredientsTab, ingredients } = useAppSelector(store => store.ingredients);
 
   const changeView = () => {
     dispatch(switchIngredientsTabEnhancer(ingredientsTab))
@@ -39,8 +38,4 @@ export const BurgerIngredients = ({ingredients}) => {
       </div>
     </section>
   )
-}
-
-BurgerIngredients.propTypes = {
-  ingredients: ingredientsPropsTypesArray
 }

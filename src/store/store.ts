@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import ingredientsReducer from './slisers/ingredientsSlice'
+import ingredientsReducer from './slisers/ingredientsSlice';
+import orderReducer from './slisers/orderSlice';
 
 export const store = configureStore({
   reducer: {
-    ingredients: ingredientsReducer
+    ingredients: ingredientsReducer,
+    order: orderReducer,
   },
 });
 

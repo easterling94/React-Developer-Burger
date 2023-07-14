@@ -1,21 +1,23 @@
+$scrollBarWidth: 8;
+
 .section {
   width: 600px;
+  height: 596px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
-.constructor {
+.ingredientsFilling {
   overflow-y: scroll;
-  height: 50vh;
+  max-height: 308px;
 }
-.constructor::-webkit-scrollbar {
+.ingredientsFilling::-webkit-scrollbar {
   width: 8px;
 }
-.constructor::-webkit-scrollbar-track {
+.ingredientsFilling::-webkit-scrollbar-track {
   background-color: #2F2F37;
-  margin-top: 100px;
-  margin-bottom: 100px;
 }
-.constructor::-webkit-scrollbar-thumb{
+.ingredientsFilling::-webkit-scrollbar-thumb{
   background-color: #8585AD;
 }
 .item {
@@ -24,7 +26,13 @@
   justify-content: end;
   align-items: center;
   margin-bottom: 16px;
+
+  &Bun {
+    @extend .item;
+    margin-right: $scrollBarWidth + px;
+  }
 }
+
 .item svg {
   width: 24px;
   height: 24px;
@@ -32,6 +40,7 @@
 
 .summary {
   margin-top: 40px;
+  margin-right: $scrollBarWidth + px;
   display: flex;
   flex-direction: row;
   justify-content: end;
@@ -53,4 +62,31 @@
   width: 33px;
   height: 33px;
   padding-left: 8px;
+}
+
+@mixin itemDrag() {
+  margin-bottom: 16px;
+  border: 1px dotted white;
+  border-radius: 25px;
+  text-align: center;
+}
+.bunEmpty {
+  @include itemDrag();
+  padding: 40px 0px;
+  margin-right: $scrollBarWidth + px;
+}
+.bunEmptyOnHover {
+  @include itemDrag();
+  padding: 40px 0px;
+  background-color: green;
+  margin-right: $scrollBarWidth + px;
+}
+.fillingEmpty {
+  @include itemDrag();
+  padding: 60px 0px;
+}
+.fillingEmptyOnHover {
+  @include itemDrag();
+  background-color: green;
+  padding: 60px 0px;
 }

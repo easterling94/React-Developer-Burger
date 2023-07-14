@@ -1,13 +1,29 @@
 import { ingredientsPropsTypes } from '../../../utils/prop-types'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Modal } from '../../modal'
 import { ModalIngredients } from '../../modal/ingredients/ingredients'
+import { useDrag } from 'react-dnd'
 import styles from './burger-ingredients.module.scss'
+import { useAppSelector } from '../../../store/store'
 
 export const Item = ({item}) => {
-  const [modalIsOpened, setModalIsOpened] = useState(false)
+  const { orderIngredients } = useAppSelector(store => store.order)
   const [count, setCount] = useState(0);
+  const [modalIsOpened, setModalIsOpened] = useState(false)
+
+  useEffect(() => {
+    setCount(orderIngredients.length ? orderIngredients.filter(el => el._id === item._id).length : 0)
+  }, [orderIngredients])
+
+
+  const [{opacity}, dragRef] = useDrag({
+    type: item.type === 'bun' ? 'bun' : 'notBun',
+    item: item,
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.2 : 1
+    })
+  });
 
   const handleClick = () => {
     setModalIsOpened(true);
@@ -18,7 +34,7 @@ export const Item = ({item}) => {
   }
 
   return (
-    <div className={styles.item}>
+    <div className={styles.item} ref={dragRef} style={{opacity}}>
       {
         modalIsOpened ? 
           <Modal closeModal={closeModalState}>

@@ -21,8 +21,8 @@ const checkResponse = async (data: Response) => {
   return SERVER_RESPONSE_TYPES.error.invalid_endpoint
 }
 
-export const getDataAPI = async (url : string) => {
-  const result = await fetch(url)
+export const getDataAPI = async () => {
+  const result = await fetch(BASE_URL_INGREDIENTS)
     .then(checkResponse)
     .catch(handleNetworkError)
   return result

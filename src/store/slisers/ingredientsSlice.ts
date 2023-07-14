@@ -1,28 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
-export type ingredientsTab = 'bun' | 'main' | 'sauce'
-
-export interface Ingretient {
-  _id: string,
-  name: string,
-  type: ingredientsTab,
-  proteins: number,
-  fat: number,
-  carbohydrates: number,
-  calories: number,
-  price: number,
-  image: string,
-  image_mobile: string,
-  image_large: string,
-  __v: number
-}
-
-
+import { ingredientsTab, Ingretient } from '../../utils/sharedTypes';
 
 export interface IngredientsState {
   ingredients: Array<Ingretient> | null;
-  ingredientsTab: ingredientsTab,
+  ingredientsTab: ingredientsTab;
   requestIngredientsFetched: boolean;
   requestIngredientsSuccess: boolean;
   requestIngredientsFailed: boolean;
