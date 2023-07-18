@@ -1,6 +1,7 @@
 import { AppDispatch } from '../store';
 import { getDataAPI } from '../../utils/api';
-import { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError } from '../slisers/ingredientsSlice';
+import { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError } from '../slices/ingredientsSlice';
+import { handleRequest } from '../../utils/handle-request';
 
 export const getDataEnhancer = () => (dispatch: AppDispatch) => {
   dispatch(requestIngredientsFetch());
@@ -13,8 +14,5 @@ export const getDataEnhancer = () => (dispatch: AppDispatch) => {
     }
     return
   };
-
-  setTimeout(() => {
-    getIngredients();
-  }, 2000);
+  handleRequest(getIngredients, 1000)
 }

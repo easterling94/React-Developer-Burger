@@ -5,6 +5,7 @@ import { ConstructorIndex } from '../constructor';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { getDataEnhancer } from '../../store/enhancers/requestIngredients';
+import { RequestResolver } from '../request-resolver/request-resolver';
 import styles from './app.module.scss';
 
 function App() {
@@ -17,21 +18,18 @@ function App() {
 
   return (
     <div className={styles.app}>
-      {ingredients && requestIngredientsSuccess ? (
+      <RequestResolver isLoading={requestIngredientsFetched} isError={requestIngredientsFailed} isSuccess={requestIngredientsSuccess}>
+        <Loader />
+        <>
+          <Error response={requestIngredientsFailed}/>
+        </>
         <>
           <AppHeader />
           <main className={styles.main}>
             <ConstructorIndex ingredients={ingredients} />
           </main>
         </>
-        ) : requestIngredientsFailed ? (
-          <>
-            <Error response={requestIngredientsFailed}/>
-          </>
-        ) : requestIngredientsFetched ? (
-          <Loader />
-        ) : null
-      }
+      </RequestResolver>
     </div>
   );
 }

@@ -1,10 +1,11 @@
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { INGREDIENTS_TYPES } from '../../../utils/consts'
-import { ItemsList } from './items-list'
-import { useMemo } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../store/store'
-import { switchIngredientsTabEnhancer, scrollToView } from '../../../store/enhancers/switchIngredientsTab'
-import styles from './burger-ingredients.module.scss'
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { INGREDIENTS_TYPES } from '../../../utils/consts';
+import { ItemsList } from './items-list';
+import { useMemo } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { switchIngredientsTabEnhancer } from '../../../store/enhancers/switchIngredientsTab';
+import { scrollToView } from '../../../utils/scroll-to-view';
+import styles from './burger-ingredients.module.scss';
 
 export const BurgerIngredients = () => {
   const dispatch = useAppDispatch();
@@ -14,9 +15,13 @@ export const BurgerIngredients = () => {
     dispatch(switchIngredientsTabEnhancer(ingredientsTab))
   }
 
-  const BUNS = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[0].type), [ingredients]);
-  const MAIN = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[1].type), [ingredients]);
-  const SAUCE = useMemo(() => ingredients.filter(el => el.type === INGREDIENTS_TYPES[2].type), [ingredients]);
+  const [BUNS, MAIN, SAUCE ] = useMemo(() => {
+    return [
+      ingredients.filter(el => el.type === INGREDIENTS_TYPES[0].type),
+      ingredients.filter(el => el.type === INGREDIENTS_TYPES[1].type),
+      ingredients.filter(el => el.type === INGREDIENTS_TYPES[2].type)
+    ]
+  }, [ingredients])
 
   return (
     <section className={styles.section} >

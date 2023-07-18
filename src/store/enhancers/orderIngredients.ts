@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Ingretient, UniqueIdIngredient } from '../../utils/sharedTypes';
 import { AppDispatch } from '../store';
-import { updateIngredients, orderIngredientsFetched, orderIngredientsSuccess, orderIngredientsFailed } from '../slisers/orderSlice';
+import { updateIngredients, orderIngredientsFetched, orderIngredientsSuccess, orderIngredientsFailed } from '../slices/orderSlice';
 import { sendOrderAPI } from '../../utils/api';
+import { handleRequest } from '../../utils/handle-request';
 
 export const addIngredientEnhancer = (ingredient: Ingretient, orderIngredients: UniqueIdIngredient[]) => (dispatch: AppDispatch) => {
   if (ingredient.type === 'bun') {
@@ -16,7 +17,11 @@ export const deleteIngredientEnhancer = (ingredient: HTMLElement, orderIngredien
   dispatch(updateIngredients(orderIngredients.filter(el => el.uuid !== ingredient.id)))
 }
 
-export const tossingIngredientEnhancer = (newOrderIngredients: UniqueIdIngredient[], bun: UniqueIdIngredient) => (dispatch: AppDispatch) => {
+export const tossingIngredientEnhancer = (dragIndex: number, hoverIndex: number, filler: UniqueIdIngredient[], bun: UniqueIdIngredient) => (dispatch: AppDispatch) => {
+  const dragCard = filler[dragIndex];
+  const newOrderIngredients = [...filler];
+  newOrderIngredients.splice(dragIndex, 1)
+  newOrderIngredients.splice(hoverIndex, 0, dragCard)
   dispatch(updateIngredients([...newOrderIngredients, bun]))
 }
 
@@ -43,8 +48,5 @@ export const sendOrderEnhancer = (orderIngredients: UniqueIdIngredient[], orderR
     }
     return
   };
-
-  setTimeout(() => {
-    sendOrder();
-  }, 2000);
+  handleRequest(sendOrder, 1000)
 }

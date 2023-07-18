@@ -8,7 +8,7 @@ import styles from './burger-ingredients.module.scss'
 import { useAppSelector } from '../../../store/store'
 
 export const Item = ({item}) => {
-  const { orderIngredients } = useAppSelector(store => store.order)
+  const orderIngredients = useAppSelector(store => store.order.orderIngredients)
   const [count, setCount] = useState(0);
   const [modalIsOpened, setModalIsOpened] = useState(false)
 

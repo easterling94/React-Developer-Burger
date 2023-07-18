@@ -1,5 +1,5 @@
 import { AppDispatch } from '../store'
-import { switchIngredientsTab } from '../slisers/ingredientsSlice'
+import { switchIngredientsTab } from '../slices/ingredientsSlice'
 import { INGREDIENTS_TYPES } from '../../utils/consts';
 
 export const switchIngredientsTabEnhancer = (ingredientsTab: string) => (dispatch: AppDispatch) => {
@@ -24,9 +24,4 @@ export const switchIngredientsTabEnhancer = (ingredientsTab: string) => (dispatc
     return
   }
   return
-}
-
-export const scrollToView = (id: string) => {
-  const scrollTo = document.getElementById(id);
-  scrollTo!.scrollIntoView({behavior: 'smooth'});
 }

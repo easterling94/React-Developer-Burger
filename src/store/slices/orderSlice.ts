@@ -40,6 +40,7 @@ export const orderSlice = createSlice({
     },
     closeModal: (state) => {
       state.orderIngredientsSuccess = false;
+      state.orderIngredientsFailed = false;
     }
   }
 })

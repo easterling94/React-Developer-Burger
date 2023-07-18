@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import ingredientsReducer from './slisers/ingredientsSlice';
-import orderReducer from './slisers/orderSlice';
+import ingredientsReducer from './slices/ingredientsSlice';
+import orderReducer from './slices/orderSlice';
 
 export const store = configureStore({
   reducer: {

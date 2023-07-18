@@ -1,5 +1,5 @@
-import styles from './order.module.css';
 import { serverResponseOnOrder } from '../../../utils/prop-types';
+import styles from './order.module.css';
 
 export const OrderDetails = ({orderDetails}) => (
   <div className={styles.card} onClick={(e) => e.stopPropagation()}>
