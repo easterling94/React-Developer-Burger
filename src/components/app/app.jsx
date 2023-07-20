@@ -14,14 +14,14 @@ function App() {
 
   useEffect(() => {
     dispatch(getDataEnhancer())
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>
-      <RequestResolver isLoading={requestIngredientsFetched} isError={requestIngredientsFailed} isSuccess={requestIngredientsSuccess}>
+      <RequestResolver isLoading={requestIngredientsFetched} isError={requestIngredientsFailed.status} isSuccess={requestIngredientsSuccess}>
         <Loader />
         <>
-          <Error response={requestIngredientsFailed}/>
+          <Error response={requestIngredientsFailed.response}/>
         </>
         <>
           <AppHeader />

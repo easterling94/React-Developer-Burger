@@ -1,4 +1,4 @@
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { getDataAPI } from '../../utils/api';
 import { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError } from '../slices/ingredientsSlice';
 import { handleRequest } from '../../utils/handle-request';

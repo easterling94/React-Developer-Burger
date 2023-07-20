@@ -6,7 +6,10 @@ export interface OrderState {
   orderIngredients: Array<UniqueIdIngredient> | [];
   orderIngredientsFetched: boolean;
   orderIngredientsSuccess: boolean;
-  orderIngredientsFailed: boolean;
+  orderIngredientsFailed: {
+    status: boolean,
+    response: string,
+  };
   orderResponse: number | null;
 }
 
@@ -14,7 +17,10 @@ const initialState: OrderState = {
   orderIngredients: [],
   orderIngredientsFetched: false,
   orderIngredientsSuccess: false,
-  orderIngredientsFailed: false,
+  orderIngredientsFailed: {
+  status: false,
+  response: '',
+  },
   orderResponse: null,
 }
 
@@ -34,13 +40,14 @@ export const orderSlice = createSlice({
       state.orderIngredientsSuccess = true;
       state.orderResponse = action.payload;
     },
-    orderIngredientsFailed: (state) => {
+    orderIngredientsFailed: (state, action: PayloadAction<string>) => {
       state.orderIngredientsFetched = false;
-      state.orderIngredientsFailed = true;
+      state.orderIngredientsFailed.status = true;
+      state.orderIngredientsFailed.response = action.payload;
     },
     closeModal: (state) => {
       state.orderIngredientsSuccess = false;
-      state.orderIngredientsFailed = false;
+      state.orderIngredientsFailed.status = false;
     }
   }
 })

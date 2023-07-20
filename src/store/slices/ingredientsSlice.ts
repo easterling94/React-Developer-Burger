@@ -7,8 +7,10 @@ export interface IngredientsState {
   ingredientsTab: ingredientsTab;
   requestIngredientsFetched: boolean;
   requestIngredientsSuccess: boolean;
-  requestIngredientsFailed: boolean;
-
+  requestIngredientsFailed: {
+    status: boolean;
+    response: string;
+  };
 }
 
 const initialState: IngredientsState = {
@@ -16,7 +18,10 @@ const initialState: IngredientsState = {
   ingredientsTab: 'bun',
   requestIngredientsFetched: false,
   requestIngredientsSuccess: false,
-  requestIngredientsFailed: false,
+  requestIngredientsFailed: {
+    status: false,
+    response: '',
+  },
 }
 
 export const ingredientsSlice = createSlice({
@@ -31,8 +36,10 @@ export const ingredientsSlice = createSlice({
       state.requestIngredientsFetched = false;
       state.requestIngredientsSuccess = true;
     },
-    requestIngredientsError: (state) => {
-      state.requestIngredientsFailed = true;
+    requestIngredientsError: (state, action: PayloadAction<string>) => {
+      state.requestIngredientsFetched = false;
+      state.requestIngredientsFailed.status = true;
+      state.requestIngredientsFailed.response = action.payload;
     },
     switchIngredientsTab: (state, action: PayloadAction<ingredientsTab>) => {
       state.ingredientsTab = action.payload;

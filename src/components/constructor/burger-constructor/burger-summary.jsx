@@ -1,7 +1,7 @@
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderDetails } from '../../modal/order/order';
 import { OrderLoader } from '../../modal/order/order-loader';
-import { OrderError } from '../../modal/order/order-error';
+import { Error } from '../../error/error';
 import { closeModal } from '../../../store/slices/orderSlice';
 import { Modal } from '../../modal';
 import { useMemo } from 'react';
@@ -38,12 +38,12 @@ export function BurgerConstructorSummary() {
         <CurrencyIcon type='primary' />
       </div>
       <Button type='primary' size='medium' onClick={sendOrderToServer} htmlType='button'>Оформить заказ</Button>
-      <RequestResolver isLoading={orderIngredientsFetched} isError={orderIngredientsFailed} isSuccess={orderIngredientsSuccess}>
+      <RequestResolver isLoading={orderIngredientsFetched} isError={orderIngredientsFailed.status} isSuccess={orderIngredientsSuccess}>
         <Modal closeModal={closeModalState}>
           <OrderLoader />
         </Modal>
         <Modal closeModal={closeModalState}>
-          <OrderError />
+          <Error response={orderIngredientsFailed.response}/>
         </Modal>
         <Modal closeModal={closeModalState}>
           <OrderDetails orderDetails={orderResponse} />
