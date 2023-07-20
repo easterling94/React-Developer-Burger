@@ -15,7 +15,7 @@ export function BurgerBun({type}) {
       isHover: monitor.isOver()
     }),
     drop(ingredient) {
-      dispatch(addIngredientEnhancer(ingredient, orderIngredients))
+      dispatch(addIngredientEnhancer(ingredient))
     }
   })
 

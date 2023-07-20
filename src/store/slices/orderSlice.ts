@@ -4,24 +4,24 @@ import { UniqueIdIngredient } from '../../utils/sharedTypes';
 
 export interface OrderState {
   orderIngredients: Array<UniqueIdIngredient> | [];
+  orderResponse: number | null;
   orderIngredientsFetched: boolean;
   orderIngredientsSuccess: boolean;
   orderIngredientsFailed: {
     status: boolean,
     response: string,
   };
-  orderResponse: number | null;
 }
 
 const initialState: OrderState = {
   orderIngredients: [],
+  orderResponse: null,
   orderIngredientsFetched: false,
   orderIngredientsSuccess: false,
   orderIngredientsFailed: {
   status: false,
   response: '',
   },
-  orderResponse: null,
 }
 
 export const orderSlice = createSlice({

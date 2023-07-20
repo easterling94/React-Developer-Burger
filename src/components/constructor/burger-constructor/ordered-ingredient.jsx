@@ -1,13 +1,17 @@
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useRef } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../store/store'
-import { useDrop, useDrag } from 'react-dnd'
-import { deleteIngredientEnhancer } from '../../../store/enhancers/orderIngredients'
-import styles from './burger-constructor.module.scss'
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useRef, useCallback } from 'react';
+import { useAppDispatch } from '../../../store/store';
+import { useDrop, useDrag } from 'react-dnd';
+import { deleteIngredientEnhancer, tossingIngredientEnhancer } from '../../../store/enhancers/orderIngredients';
+import styles from './burger-constructor.module.scss';
 
-export function OrderedIngredient({item, index, moveCard}) {
-  const orderIngredients = useAppSelector(store => store.order.orderIngredients);
+export function OrderedIngredient({item, index}) {
   const dispatch = useAppDispatch();
+
+  const moveCard = useCallback((dragIndex, hoverIndex) => {
+    dispatch(tossingIngredientEnhancer(dragIndex, hoverIndex))
+  }, [dispatch]);
+
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: 'component',
@@ -51,7 +55,7 @@ export function OrderedIngredient({item, index, moveCard}) {
   const preventDefault = (e) => e.preventDefault();
 
   const handleClose = () => {
-    dispatch(deleteIngredientEnhancer(ref.current, orderIngredients))
+    dispatch(deleteIngredientEnhancer(ref.current))
   }
 
   return (

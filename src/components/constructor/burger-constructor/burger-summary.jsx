@@ -25,7 +25,7 @@ export function BurgerConstructorSummary() {
   }
 
   const sendOrderToServer = async () => {
-    dispatch(sendOrderEnhancer(orderIngredients, orderResponse))
+    dispatch(sendOrderEnhancer())
   }
   const totalCostEval = useMemo(() => {
     return orderIngredients ? orderIngredients.reduce((acc, current) => acc + (current.type === 'bun' ? current.price * 2 : current.price), 0) : 0
