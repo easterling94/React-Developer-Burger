@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Ingretient, UniqueIdIngredient } from '../../utils/sharedTypes';
+import { Ingretient } from '../../utils/sharedTypes';
 import { AppDispatch, RootState } from '../store';
 import { updateIngredients, orderIngredientsFetched, orderIngredientsSuccess, orderIngredientsFailed } from '../slices/orderSlice';
 import { sendOrderAPI } from '../../utils/api';
 import { handleRequest } from '../../utils/handle-request';
 
-export const addIngredientEnhancer = (ingredient: Ingretient) => (dispatch: AppDispatch, getState: () => RootState) => {
+export const addIngredientThunk = (ingredient: Ingretient) => (dispatch: AppDispatch, getState: () => RootState) => {
   const orderIngredients = getState().order.orderIngredients
   if (ingredient.type === 'bun') {
     dispatch(updateIngredients([...orderIngredients.filter(el => el.type !== 'bun'), {...ingredient, uuid: uuidv4()}]));
@@ -14,12 +14,12 @@ export const addIngredientEnhancer = (ingredient: Ingretient) => (dispatch: AppD
   dispatch(updateIngredients([...orderIngredients, {...ingredient, uuid: uuidv4()}]));
 }
 
-export const deleteIngredientEnhancer = (ingredient: HTMLElement) => (dispatch: AppDispatch, getState: () => RootState) => {
+export const deleteIngredientThunk = (ingredient: HTMLElement) => (dispatch: AppDispatch, getState: () => RootState) => {
   const orderIngredients = getState().order.orderIngredients;
   dispatch(updateIngredients(orderIngredients.filter(el => el.uuid !== ingredient.id)));
 }
 
-export const tossingIngredientEnhancer = (dragIndex: number, hoverIndex: number) => (dispatch: AppDispatch, getState: () => RootState) => {
+export const tossingIngredientThunk = (dragIndex: number, hoverIndex: number) => (dispatch: AppDispatch, getState: () => RootState) => {
   const filler = getState().order.orderIngredients.filter(el => el.type !== 'bun');
   const bun = getState().order.orderIngredients.filter(el => el.type === 'bun')[0];
   const dragCard = filler[dragIndex];
@@ -29,7 +29,7 @@ export const tossingIngredientEnhancer = (dragIndex: number, hoverIndex: number)
   dispatch(updateIngredients([...newOrderIngredients, bun]));
 }
 
-export const sendOrderEnhancer = () => (dispatch: AppDispatch, getStore: () => RootState) => {
+export const sendOrderThunk = () => (dispatch: AppDispatch, getStore: () => RootState) => {
   const orderResponse = getStore().order.orderResponse;
   const orderIngredients = getStore().order.orderIngredients;
   if (orderResponse) {

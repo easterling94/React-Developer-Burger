@@ -3,7 +3,7 @@ import { INGREDIENTS_TYPES } from '../../../utils/consts';
 import { ItemsList } from './items-list';
 import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { switchIngredientsTabEnhancer } from '../../../store/enhancers/switchIngredientsTab';
+import { switchIngredientsTabThunk } from '../../../store/thunks/switchIngredientsTab';
 import { scrollToView } from '../../../utils/scroll-to-view';
 import styles from './burger-ingredients.module.scss';
 
@@ -12,7 +12,7 @@ export const BurgerIngredients = () => {
   const { ingredientsTab, ingredients } = useAppSelector(store => store.ingredients);
 
   const changeView = () => {
-    dispatch(switchIngredientsTabEnhancer(ingredientsTab))
+    dispatch(switchIngredientsTabThunk(ingredientsTab))
   }
 
   const [BUNS, MAIN, SAUCE ] = useMemo(() => {

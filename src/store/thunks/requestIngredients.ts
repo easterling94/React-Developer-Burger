@@ -3,7 +3,7 @@ import { getDataAPI } from '../../utils/api';
 import { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError } from '../slices/ingredientsSlice';
 import { handleRequest } from '../../utils/handle-request';
 
-export const getDataEnhancer = () => (dispatch: AppDispatch) => {
+export const getDataThunk = () => (dispatch: AppDispatch) => {
   dispatch(requestIngredientsFetch());
   const getIngredients = async () => {
     const result = await getDataAPI();

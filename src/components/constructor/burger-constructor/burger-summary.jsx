@@ -6,7 +6,7 @@ import { closeModal } from '../../../store/slices/orderSlice';
 import { Modal } from '../../modal';
 import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { sendOrderEnhancer } from '../../../store/enhancers/orderIngredients';
+import { sendOrderThunk } from '../../../store/thunks/orderIngredients';
 import { RequestResolver } from '../../request-resolver/request-resolver';
 import styles from './burger-constructor.module.scss'
 
@@ -25,7 +25,7 @@ export function BurgerConstructorSummary() {
   }
 
   const sendOrderToServer = async () => {
-    dispatch(sendOrderEnhancer())
+    dispatch(sendOrderThunk())
   }
   const totalCostEval = useMemo(() => {
     return orderIngredients ? orderIngredients.reduce((acc, current) => acc + (current.type === 'bun' ? current.price * 2 : current.price), 0) : 0

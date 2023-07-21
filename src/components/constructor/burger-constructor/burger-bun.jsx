@@ -2,7 +2,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { useDrop } from 'react-dnd';
 import { CONSTRUCTOR_ITEM_POSITIONS } from '../../../utils/consts';
-import { addIngredientEnhancer } from '../../../store/enhancers/orderIngredients';
+import { addIngredientThunk } from '../../../store/thunks/orderIngredients';
 import styles from './burger-constructor.module.scss'
 
 export function BurgerBun({type}) {
@@ -15,7 +15,7 @@ export function BurgerBun({type}) {
       isHover: monitor.isOver()
     }),
     drop(ingredient) {
-      dispatch(addIngredientEnhancer(ingredient))
+      dispatch(addIngredientThunk(ingredient))
     }
   })
 

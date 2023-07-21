@@ -2,7 +2,7 @@ import { AppDispatch } from '../store'
 import { switchIngredientsTab } from '../slices/ingredientsSlice'
 import { INGREDIENTS_TYPES } from '../../utils/consts';
 
-export const switchIngredientsTabEnhancer = (ingredientsTab: string) => (dispatch: AppDispatch) => {
+export const switchIngredientsTabThunk = (ingredientsTab: string) => (dispatch: AppDispatch) => {
   const GAP = 50;
   const navId = document.getElementById('nav')!.getBoundingClientRect().bottom;
   const buns = document.getElementById('bun')!.getBoundingClientRect();

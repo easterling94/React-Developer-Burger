@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { useDrop } from 'react-dnd';
-import { addIngredientEnhancer } from '../../../store/enhancers/orderIngredients';
+import { addIngredientThunk } from '../../../store/thunks/orderIngredients';
 import { OrderedIngredient } from './ordered-ingredient';
 import styles from './burger-constructor.module.scss'
 
@@ -14,7 +14,7 @@ export function BurgerFilling() {
       isHover: monitor.isOver()
     }),
     drop(ingredient) {
-      dispatch(addIngredientEnhancer(ingredient))
+      dispatch(addIngredientThunk(ingredient))
     }
   })
 

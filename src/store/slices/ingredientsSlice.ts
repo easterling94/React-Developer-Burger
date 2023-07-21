@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import { ingredientsTab, Ingretient } from '../../utils/sharedTypes';
 
 export interface IngredientsState {
@@ -11,7 +11,7 @@ export interface IngredientsState {
     status: boolean;
     response: string;
   };
-}
+};
 
 const initialState: IngredientsState = {
   ingredients: null,
@@ -22,7 +22,7 @@ const initialState: IngredientsState = {
     status: false,
     response: '',
   },
-}
+};
 
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
@@ -45,7 +45,7 @@ export const ingredientsSlice = createSlice({
       state.ingredientsTab = action.payload;
     }
   }
-})
+});
 
 const { actions, reducer } = ingredientsSlice;
 

@@ -4,7 +4,7 @@ import { Loader } from '../loader/loader';
 import { ConstructorIndex } from '../constructor';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { getDataEnhancer } from '../../store/enhancers/requestIngredients';
+import { getDataThunk } from '../../store/thunks/requestIngredients';
 import { RequestResolver } from '../request-resolver/request-resolver';
 import styles from './app.module.scss';
 
@@ -13,7 +13,7 @@ function App() {
   const { ingredients, requestIngredientsFetched, requestIngredientsSuccess, requestIngredientsFailed} = useAppSelector(store => store.ingredients)
 
   useEffect(() => {
-    dispatch(getDataEnhancer())
+    dispatch(getDataThunk());
   }, [dispatch]);
 
   return (

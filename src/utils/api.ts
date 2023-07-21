@@ -6,7 +6,8 @@ export const SERVER_RESPONSE_TYPES = {
   success: 'success',
   error: {
     cant_reach_server: 'Проблемы с соединением',
-    invalid_endpoint: 'В данный момент сервер не принимает заказы',
+    cant_reach_ingredients: 'В данный момент сервер недоступен',
+    cant_send_order: 'В данный момент сервер не принимает заказы',
   },
 }
 
@@ -19,9 +20,9 @@ const checkResponse = async (data: Response, requestType: string) => {
     return data.json();
   }
   return requestType === BASE_URL_INGREDIENTS ? 
-        SERVER_RESPONSE_TYPES.error.invalid_endpoint 
+        SERVER_RESPONSE_TYPES.error.cant_reach_ingredients 
         : requestType === BASE_URL_ORDERS ? 
-        SERVER_RESPONSE_TYPES.error.invalid_endpoint 
+        SERVER_RESPONSE_TYPES.error.cant_send_order 
         : null
 }
 
