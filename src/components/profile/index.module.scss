@@ -1,0 +1,55 @@
+@import '../../assets/styles/styles-vars.scss';
+
+.section {
+  align-self: self-start;
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+}
+.nav {
+  margin-bottom: 80px;
+}
+@mixin link() {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  text-decoration: none;
+  display: flex;
+  width: 320px;
+  height: 64px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pending {
+  color: #8585AD;
+  @include link();
+}
+.active {
+  color: #F2F2F3;
+  @include link();
+}
+.p {
+  width: 320px;
+  flex-shrink: 0;
+  color: #8585AD;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  opacity: 0.4000000059604645;
+}
+.input {
+  margin-bottom: 24px;
+}
+.input:last-child {
+  margin-bottom: 0px;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+.button {
+  font-family: $fontJetBrainsMono;
+}

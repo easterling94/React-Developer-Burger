@@ -1,16 +1,19 @@
-import { ingredientsPropsTypes } from '../../../utils/prop-types'
-import { useState, useEffect } from 'react'
-import { Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Modal } from '../../modal'
-import { ModalIngredients } from '../../modal/ingredients/ingredients'
-import { useDrag } from 'react-dnd'
-import styles from './burger-ingredients.module.scss'
-import { useAppSelector } from '../../../store/store'
+import { ingredientsPropsTypes } from '../../../utils/prop-types';
+import { useState, useEffect } from 'react';
+import { Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDrag } from 'react-dnd';
+import { useAppSelector, useAppDispatch } from '../../../store/store';
+import { Link, useLocation } from 'react-router-dom';
+import { handleModal } from '../../../store/slices/ingredientsSlice';
+import { getDataThunk } from '../../../store/thunks/requestIngredients';
+import styles from './burger-ingredients.module.scss';
 
 export const Item = ({item}) => {
-  const orderIngredients = useAppSelector(store => store.order.orderIngredients)
+  const orderIngredients = useAppSelector(store => store.order.orderIngredients);
+  const dispatch = useAppDispatch();
   const [count, setCount] = useState(0);
-  const [modalIsOpened, setModalIsOpened] = useState(false)
+  const location = useLocation();
+  const ingredientId = item['_id'];
 
   useEffect(() => {
     setCount(orderIngredients.length ? orderIngredients.filter(el => el._id === item._id).length : 0)
@@ -26,32 +29,29 @@ export const Item = ({item}) => {
   });
 
   const handleClick = () => {
-    setModalIsOpened(true);
-  }
-
-  const closeModalState = () => {
-    setModalIsOpened(!modalIsOpened)
+    dispatch(getDataThunk(ingredientId));
+    dispatch(handleModal());
   }
 
   return (
-    <div className={styles.item} ref={dragRef} style={{opacity}}>
-      {
-        modalIsOpened ? 
-          <Modal closeModal={closeModalState}>
-            <ModalIngredients item={item}/>
-          </Modal>
-        : null
-      }
-      <Counter className={styles.counter} count={count} size={count < 10 ? 'default' : 'small'}/>
-      <img alt={item.name} src={item.image} className={styles.img} onClick={handleClick}/>
-      <p className={styles.price}>
-        <span>{item.price}</span>
-        <CurrencyIcon type='primary'/>
-      </p>
-      <p className={styles.name}>
-        {item.name}
-      </p>
-    </div>
+    <Link
+      key={ingredientId}
+      to={`/ingredients/${ingredientId}`}
+      state={{ background: location }}
+      className={styles.link}
+    >
+      <div className={styles.item} ref={dragRef} style={{opacity}}>
+        <Counter className={styles.counter} count={count} size={count < 10 ? 'default' : 'small'}/>
+        <img alt={item.name} src={item.image} className={styles.img} onClick={handleClick}/>
+        <p className={styles.price}>
+          <span>{item.price}</span>
+          <CurrencyIcon type='primary'/>
+        </p>
+        <p className={styles.name}>
+          {item.name}
+        </p>
+      </div>
+    </Link>
   )
 }
 

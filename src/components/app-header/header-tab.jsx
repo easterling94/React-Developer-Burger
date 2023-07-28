@@ -1,21 +1,36 @@
-import PropTypes from 'prop-types'
-import { ICON_TYPES } from '../../utils/consts'
-import styles from './header.module.scss'
+import { Link, useLocation } from 'react-router-dom';
+import { ICON_TYPES } from '../../utils/consts';
+import { HEADER_TABS } from '../../utils/consts';
+import { getCookie } from '../../utils/cookie';
+import PropTypes from 'prop-types';
+import styles from './header.module.scss';
 
-export const HeaderTab = ({title, icon, type}) => {
-  const MyComponent = icon;
+export const HeaderTab = ({ type }) => {
+  const userNameCookie = getCookie('name');
+  const location = useLocation().pathname;
+  const headerPath = type.link;
+  const state = 
+    location === headerPath ? 
+    true : 
+    (location.match(/^\/.+?(?=\/)/) && location.match(/^\/.+?(?=\/)/)[0] === headerPath) ? 
+      true : 
+      false;
+
+  const Icon = type.icon;
   return (
-    <a href='/' className={type === ICON_TYPES.primary ? styles.linkPrimary : styles.linkSecondary}>
+    <Link to={type.link} className={state ? styles.linkPrimary : styles.linkSecondary}>
       <div className={styles.block}>
-        <MyComponent type={type}/>
-        {title}
+        <Icon type={state ? ICON_TYPES.primary : ICON_TYPES.secondary}/>
+        {type !== HEADER_TABS.profile ? type.name : userNameCookie ? userNameCookie : type.name}
       </div>
-    </a>    
+    </Link>    
   )
 }
 
 HeaderTab.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.elementType.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    icon: PropTypes.elementType.isRequired,
+  })
 }

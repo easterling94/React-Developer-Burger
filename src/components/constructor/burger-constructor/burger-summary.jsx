@@ -1,22 +1,21 @@
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderDetails } from '../../modal/order/order';
-import { OrderLoader } from '../../modal/order/order-loader';
-import { Error } from '../../error/error';
 import { closeModal } from '../../../store/slices/orderSlice';
 import { Modal } from '../../modal';
 import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { sendOrderThunk } from '../../../store/thunks/orderIngredients';
-import { RequestResolver } from '../../request-resolver/request-resolver';
-import styles from './burger-constructor.module.scss'
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '../../../utils/consts';
+import styles from './burger-constructor.module.scss';
 
 export function BurgerConstructorSummary() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(store => store.user.user);
+  const navigate = useNavigate();
   const { 
     orderIngredients, 
-    orderIngredientsFetched, 
     orderIngredientsSuccess,
-    orderIngredientsFailed,
     orderResponse,
   } = useAppSelector(store => store.order);
 
@@ -25,11 +24,14 @@ export function BurgerConstructorSummary() {
   }
 
   const sendOrderToServer = async () => {
+    if(!user) {
+      navigate(PATHS.login)
+    }
     dispatch(sendOrderThunk())
   }
   const totalCostEval = useMemo(() => {
     return orderIngredients ? orderIngredients.reduce((acc, current) => acc + (current.type === 'bun' ? current.price * 2 : current.price), 0) : 0
-  }, [orderIngredients])
+  }, [orderIngredients]);
 
   return(
     <div className={styles.summary}>
@@ -38,17 +40,13 @@ export function BurgerConstructorSummary() {
         <CurrencyIcon type='primary' />
       </div>
       <Button type='primary' size='medium' onClick={sendOrderToServer} htmlType='button'>Оформить заказ</Button>
-      <RequestResolver isLoading={orderIngredientsFetched} isError={orderIngredientsFailed.status} isSuccess={orderIngredientsSuccess}>
-        <Modal closeModal={closeModalState}>
-          <OrderLoader />
-        </Modal>
-        <Modal closeModal={closeModalState}>
-          <Error response={orderIngredientsFailed.response}/>
-        </Modal>
+      {
+        orderIngredientsSuccess ?
         <Modal closeModal={closeModalState}>
           <OrderDetails orderDetails={orderResponse} />
         </Modal>
-      </RequestResolver>
+        : null
+      }
     </div>
   )
 }

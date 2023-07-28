@@ -3,9 +3,10 @@ import { useRef, useCallback } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { useDrop, useDrag } from 'react-dnd';
 import { deleteIngredientThunk, tossingIngredientThunk } from '../../../store/thunks/orderIngredients';
+import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.scss';
 
-export function OrderedIngredient({item, index}) {
+export function OrderedIngredient({ item, index }) {
   const dispatch = useAppDispatch();
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
@@ -71,4 +72,9 @@ export function OrderedIngredient({item, index}) {
       <ConstructorElement text={item.name} thumbnail={item.image_mobile} price={item.price} handleClose={handleClose}/>
     </div>
   )
+}
+
+OrderedIngredient.propTypes = {
+  item: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 }

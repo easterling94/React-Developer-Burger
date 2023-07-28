@@ -54,5 +54,5 @@ export const sendOrderThunk = () => (dispatch: AppDispatch, getStore: () => Root
     }
     return;
   };
-  handleRequest(sendOrder, 1000);
+  handleRequest(sendOrder, 0);
 }

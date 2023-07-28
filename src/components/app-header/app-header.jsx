@@ -1,21 +1,19 @@
-import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { HeaderTab } from './header-tab'
-import { ICON_TYPES } from '../../utils/consts'
-import styles from './header.module.scss'
-
-const ICON = [BurgerIcon, ListIcon, ProfileIcon]
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { HeaderTab } from './header-tab';
+import { HEADER_TABS } from '../../utils/consts';
+import styles from './header.module.scss';
 
 export const AppHeader = () => (
   <header className={styles.header}>
     <nav className={styles.nav}>
       <div className={styles.leftBlock}>
-        <HeaderTab title='Конструктор' icon={ICON[0]} type={ICON_TYPES.primary}/>
-        <HeaderTab title='Лента заказов' icon={ICON[1]} type={ICON_TYPES.secondary}/>
+        <HeaderTab type={HEADER_TABS.constructor}/>
+        <HeaderTab type={HEADER_TABS.orders}/>
       </div>
       <div className={styles.centerBlock}>
         <Logo />
       </div>
-      <HeaderTab title='Личный кабинет' icon={ICON[2]} type={ICON_TYPES.secondary}/>
+      <HeaderTab type={HEADER_TABS.profile}/>
     </nav>
   </header>
 )

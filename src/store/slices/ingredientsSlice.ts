@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction, SerializedError } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { ingredientsTab, Ingretient } from '../../utils/sharedTypes';
 
 export interface IngredientsState {
   ingredients: Array<Ingretient> | null;
+  ingredientSeparate: Ingretient | null,
+  showModal: boolean,
   ingredientsTab: ingredientsTab;
   requestIngredientsFetched: boolean;
   requestIngredientsSuccess: boolean;
@@ -15,6 +17,8 @@ export interface IngredientsState {
 
 const initialState: IngredientsState = {
   ingredients: null,
+  ingredientSeparate: null,
+  showModal: false,
   ingredientsTab: 'bun',
   requestIngredientsFetched: false,
   requestIngredientsSuccess: false,
@@ -43,12 +47,20 @@ export const ingredientsSlice = createSlice({
     },
     switchIngredientsTab: (state, action: PayloadAction<ingredientsTab>) => {
       state.ingredientsTab = action.payload;
-    }
+    },
+    requestIngredientSeparateSuccess: (state, action: PayloadAction<Ingretient>) => {
+      state.ingredientSeparate = action.payload;
+      state.requestIngredientsFetched = false;
+      state.requestIngredientsSuccess = true;
+    },
+    handleModal: (state) => {
+      state.showModal = !state.showModal
+    },
   }
 });
 
 const { actions, reducer } = ingredientsSlice;
 
-export const { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError, switchIngredientsTab} = actions
+export const { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError, switchIngredientsTab, requestIngredientSeparateSuccess, handleModal } = actions
 
 export default reducer

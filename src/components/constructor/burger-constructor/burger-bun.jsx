@@ -3,9 +3,10 @@ import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { useDrop } from 'react-dnd';
 import { CONSTRUCTOR_ITEM_POSITIONS } from '../../../utils/consts';
 import { addIngredientThunk } from '../../../store/thunks/orderIngredients';
+import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.scss'
 
-export function BurgerBun({type}) {
+export function BurgerBun({ type }) {
   const dispatch = useAppDispatch()
   const orderIngredients = useAppSelector(store => store.order.orderIngredients);
   const bun = orderIngredients ? orderIngredients.filter(el => el.type === 'bun')[0] : null
@@ -36,4 +37,8 @@ export function BurgerBun({type}) {
     }
     </>
   )
+}
+
+BurgerBun.propTypes = {
+  type: PropTypes.string,
 }
