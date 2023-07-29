@@ -1,4 +1,4 @@
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { NavLink, useLocation, Outlet } from 'react-router-dom';
 import { PATHS } from '../../utils/consts';
 import styles from './index.module.scss';
 
@@ -9,30 +9,30 @@ export const Profile = () => {
     <section className={styles.section}>
       <div>
         <nav className={styles.nav}>
-        <Link
+        <NavLink
           to={{ pathname: PATHS.profileInfo }}
           className={
             location === PATHS.profileInfo ? styles.active: styles.pending
           }
         >
           Профиль
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to={{ pathname: PATHS.profileOrders }}
           className={
             location === PATHS.profileOrders ? styles.active: styles.pending
           }
         >
           История заказов
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to={{ pathname: PATHS.profileLogout }}
           className={
             location === PATHS.profileLogout ? styles.active: styles.pending
           }
         >
           Выход
-        </Link>
+        </NavLink>
         </nav>
         <p className={styles.p}>В этом разделе вы можете изменить свои персональные данные</p>
       </div>

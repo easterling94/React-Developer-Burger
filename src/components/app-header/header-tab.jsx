@@ -1,13 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { ICON_TYPES } from '../../utils/consts';
 import { HEADER_TABS } from '../../utils/consts';
-import { getCookie } from '../../utils/cookie';
 import PropTypes from 'prop-types';
+import { useAppSelector } from '../../store/store';
 import styles from './header.module.scss';
 
 export const HeaderTab = ({ type }) => {
-  const userNameCookie = getCookie('name');
   const location = useLocation().pathname;
+  const userName = useAppSelector(store => store.user.user)
   const headerPath = type.link;
   const state = 
     location === headerPath ? 
@@ -18,12 +18,14 @@ export const HeaderTab = ({ type }) => {
 
   const Icon = type.icon;
   return (
-    <Link to={type.link} className={state ? styles.linkPrimary : styles.linkSecondary}>
+    <NavLink to={type.link} className={({ isActive }) =>
+      isActive ? `${styles.linkPrimary}` : `${styles.linkSecondary}`
+    }>
       <div className={styles.block}>
         <Icon type={state ? ICON_TYPES.primary : ICON_TYPES.secondary}/>
-        {type !== HEADER_TABS.profile ? type.name : userNameCookie ? userNameCookie : type.name}
+        {type !== HEADER_TABS.profile ? type.name : userName ? userName.name : type.name}
       </div>
-    </Link>    
+    </NavLink>    
   )
 }
 

@@ -30,15 +30,11 @@ function App() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const accessToken = getCookie('accessToken');
-
   
   useEffect(() => {
     dispatch(getDataThunk());
-    if(accessToken) {
-      dispatch(sendGetUserThunk())
-    }
-  }, [dispatch, accessToken])
+    dispatch(sendGetUserThunk());
+  }, [dispatch])
   
   let background = location.state && location.state.background;
 
@@ -53,10 +49,10 @@ function App() {
       <Routes location={background}>
         <Route path={PATHS.home} element={<Main />}>
           <Route path={PATHS.home} element={<HomePage />} />
-          <Route path={PATHS.login} element={<LoginPage />} />
-          <Route path={PATHS.register} element={<RegisterPage />} />
-          <Route path={PATHS.passwordForgot} element={<PasswordForgotPage />} />
-          <Route path={PATHS.passwordReset} element={<PasswordResetPage />} />
+          <Route path={PATHS.login} element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />}/>
+          <Route path={PATHS.register} element={<ProtectedRoute onlyUnAuth element={<RegisterPage />} />}/>
+          <Route path={PATHS.passwordForgot} element={<ProtectedRoute onlyUnAuth element={<PasswordForgotPage />} />}/>
+          <Route path={PATHS.passwordReset} element={<ProtectedRoute onlyUnAuth element={<PasswordResetPage />} />}/>
           <Route path='ingredients/:id' element={<IngredientPage />} />
           <Route path={PATHS.profile} element={<ProtectedRoute element={<Profile />} />}>
             <Route path={PATHS.profileInfo} element={<ProtectedRoute element={<ProfileInfoPage />} />}/>

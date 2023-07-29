@@ -1,12 +1,18 @@
 import { Form } from '../components/form/form';
 import { generateInput, Name, Type, generateHint } from '../utils/form';
 import { useAppSelector } from '../store/store';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { PATHS } from '../utils/consts';
 
 export const PasswordResetPage = () => {
-  const user = useAppSelector(store => store.user.user);
-  const reset = useAppSelector(store => store.user.requestPasswordResetSuccess);
+  const { passwordReset }= useAppSelector(store => store.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!passwordReset) {
+      navigate(PATHS.login)
+    } else return
+  }, [passwordReset])
 
   const inputs = [
     generateInput({placeholder: 'Введите новый пароль', name: Name.password, type: Type.password}),
@@ -17,12 +23,6 @@ export const PasswordResetPage = () => {
     generateHint({link: '/login', question: 'Вспомнили пароль?', answer: 'Войти'})
   ]
   return (
-    user ? 
-    <Navigate to={PATHS.home} replace />
-    :
-    !reset ?
     <Form title='Восстановление пароля' inputs={inputs} buttonTitle='Сохранить' hints={hints}/>
-    :
-    <Navigate to={PATHS.profile} replace />
   )
 }

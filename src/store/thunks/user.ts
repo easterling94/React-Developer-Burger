@@ -1,4 +1,4 @@
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState } from '../store';
 import {
   sendRegisterRequestAPI,
   sendLoginUserAPI,
@@ -10,17 +10,9 @@ import {
 } from '../../utils/api';
 
 import { 
-  updateUserAfterRegistration, 
-  registerUserSuccess, 
-  registerUserFailed, 
-  loginUserSuccess, 
-  loginUserFailed, 
-  getUserSuccess, 
-  getUserFailed, 
-  sendUserLogout, 
-  sendUserUpdate,
-  sendPasswordForgot,
-  sendPasswordReset,
+  updateUser, 
+  logoutUser,
+  passwordReset,
 } from '../slices/userSlice';
 
 import { 
@@ -29,6 +21,7 @@ import {
 } from '../../utils/api'
 
 import {
+  getCookie,
   setCookie,
 } from '../../utils/cookie';
 
@@ -40,14 +33,10 @@ export const sendRegisterRequestThunk = (name: string, email: string, password: 
     const refreshToken = data.refreshToken;
     setCookie('accessToken', authToken);
     localStorage.setItem('refreshToken', refreshToken);
-    setCookie('name', data.user.name);
-    setCookie('email', data.user.email);
-    dispatch(registerUserSuccess())
-    dispatch(updateUserAfterRegistration(data.user))
+    dispatch(updateUser(data.user))
     return data
   })
-  .catch(handleNetworkError)
-  dispatch(registerUserFailed());
+  .catch(handleNetworkError);
 }
 
 export const sendLoginUserThunk = (email: string, password: string) => (dispatch: AppDispatch) => {
@@ -58,64 +47,52 @@ export const sendLoginUserThunk = (email: string, password: string) => (dispatch
     const refreshToken = data.refreshToken;
     localStorage.setItem('refreshToken', refreshToken);
     setCookie('accessToken', authToken);
-    setCookie('name', data.user.name);
-    setCookie('email', data.user.email);
-    dispatch(loginUserSuccess(data.user));
-    return data
-  })
-  .catch(handleNetworkError)
-  dispatch(loginUserFailed());
-}
-
-export const sendGetUserThunk = () => (dispatch: AppDispatch) => {
-  sendGetUserAPI()
-  .then(data => {
-    dispatch(getUserSuccess(data.user));
-    setCookie('name', data.user.name);
-    setCookie('email', data.user.email);
+    dispatch(updateUser(data.user));
     return data
   })
   .catch(handleNetworkError);
-  dispatch(getUserFailed());
+}
+
+export const sendGetUserThunk = () => async (dispatch: AppDispatch, getState: () => RootState) => {
+  const accessToken = getCookie('accessToken');
+  if (accessToken) {
+    const data = await sendGetUserAPI();
+    dispatch(updateUser(data.user));
+  }
 }
 
 
 export const sendUpdateUserThunk = (name: string, email: string) => (dispatch: AppDispatch) => {
   sendUpdateUserAPI(name, email)
   .then(data => {
-    dispatch(sendUserUpdate({
+    dispatch(updateUser({
         name: name,
         email: email,
       }))
-    setCookie('name', data.user.name);
-    setCookie('email', data.user.email);
     alert('Данные пользователя успешно обновились')
     return data
   })
-  .catch(handleNetworkError);
 }
 
 export const sendLogoutUserThunk = () => (dispatch: AppDispatch) => {
   sendLogoutUserAPI()
   .then(checkResponse)
   .then(data => {
-    setCookie('name', null, { expires: -1 })
-    setCookie('email', null, { expires: -1 })
     setCookie('accessToken', null, { expires: -1 })
     localStorage.removeItem('refreshToken')
-    dispatch(sendUserLogout())
     alert('Вы успешно вышли из аккаунта')
     return data
   })
   .catch(handleNetworkError);
+  dispatch(logoutUser())
 }
 
-export const sendForgotPasswordThunk = (mail: string) => (dispatch: AppDispatch) => {
-  sendForgotPasswordAPI(mail)
+export const sendForgotPasswordThunk = (email: string) => (dispatch: AppDispatch) => {
+  sendForgotPasswordAPI(email)
   .then(checkResponse)
   .then(data => {
-    dispatch(sendPasswordForgot())
-    alert(`Пароль был выслан на почту ${mail}`)
+    alert(`Пароль был выслан на почту ${email}`)
+    dispatch(passwordReset());
     return data
   })
   .catch(handleNetworkError)
@@ -125,8 +102,8 @@ export const sendResetPasswordThunk = (password: string, code: string) => (dispa
   sendResetPasswordAPI(password, code)
   .then(checkResponse)
   .then(data => {
-    dispatch(sendPasswordReset())
     alert('Пароль был успешно обновлен')
+    dispatch(passwordReset());
     return data
   })
   .catch(handleNetworkError)

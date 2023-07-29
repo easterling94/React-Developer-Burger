@@ -1,5 +1,5 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { submitFormThunk } from '../../store/thunks/form';
 import { Name } from '../../utils/form';
 import { useAppSelector, useAppDispatch } from '../../store/store';
@@ -9,13 +9,23 @@ import { useLocation } from 'react-router-dom';
 
 export const ProfileInfo = () => {
   const form = useAppSelector(store => store.form);
+  const user = useAppSelector(store => store.user.user)
   const dispatch = useAppDispatch();
-  const location = useLocation()
+  const location = useLocation();
+
+  const [hasChanged, setHasChanged] = useState(false)
 
   useEffect(() => {
     dispatch(changeInputThunk())
   }, [])
 
+  useEffect(() => {
+    if (form.name !== user.name || form.email !== user.email || form.password !== '') {
+      setHasChanged(true)
+    } else {
+      setHasChanged(false)
+    }
+  }, [form, user])
   
   const changeName = (e) => {
     dispatch(changeInputThunk(e));
@@ -39,8 +49,14 @@ export const ProfileInfo = () => {
       <Input name={Name.email} type='email' placeholder='Логин' value={form.email} icon='EditIcon' onChange={changeEmail} extraClass={styles.input}/>
       <Input name={Name.password} type='password' placeholder='Пароль' value={form.password} icon='EditIcon' onChange={changePassword} extraClass={styles.input}/>
       <div className={styles.buttons}>
-        <Button htmlType='reset' type="primary" size="small" extraClass={styles.button} onClick={onReset}>Вернуть</Button>
-        <Button htmlType='submit' type="primary" size="small" extraClass={styles.button} onClick={onSubmit}>Сохранить</Button>
+        {
+          hasChanged ? 
+          <>
+            <Button htmlType='reset' type="primary" size="small" extraClass={styles.button} onClick={onReset}>Вернуть</Button>
+            <Button htmlType='submit' type="primary" size="small" extraClass={styles.button} onClick={onSubmit}>Сохранить</Button>
+          </>
+          : null
+        }
       </div>
     </div>
   )

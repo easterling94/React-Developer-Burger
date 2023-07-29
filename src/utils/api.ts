@@ -35,7 +35,8 @@ export const sendOrderAPI = async (order: Array<string>) => {
   const data = await fetch(BASE_URL_ORDERS, {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json;charset=utf-8"
+      "Content-Type": "application/json;charset=utf-8",
+      authorization: 'Bearer ' + getCookie('accessToken')
     },
     body: JSON.stringify({"ingredients":order.flat()})
   })

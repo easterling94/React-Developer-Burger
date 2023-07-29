@@ -1,25 +1,28 @@
 import { useAppSelector } from '../../store/store';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { PATHS } from '../../utils/consts';
-import { useAppDispatch } from '../../store/store';
-import { sendGetUserThunk } from '../../store/thunks/user';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
-export const ProtectedRoute = ({allowIfNotAuth = false, element}) => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(sendGetUserThunk());
-  }, [])
-
-  const user = useAppSelector((store) => store.user.user);
+export const ProtectedRoute = ({onlyUnAuth = false, element}) => {
+  const { user } = useAppSelector(store => store.user);
   
+  const location = useLocation();
 
-  if (!allowIfNotAuth && !user) {
-    return <Navigate to={PATHS.login} />;
+  if (onlyUnAuth && user) {
+    const { from } = location.state || { from: { pathname: '/' }}
+    return <Navigate to={from} />
   }
 
-  return element;
+  if (!onlyUnAuth && !user) {
+    return <Navigate to={PATHS.login} state={{from: location}}/>
+  }
+
+  if (!onlyUnAuth && user) {
+    return (
+      element
+    )
+  }
+  return element
 }
 
 ProtectedRoute.propTypes = {
