@@ -46,6 +46,7 @@ export const sendOrderThunk = () => (dispatch: AppDispatch, getStore: () => Root
   }
   dispatch(orderIngredientsFetched());
   const sendOrder = async () => {
+    dispatch(orderIngredientsFetched());
     const result = await sendOrderAPI(orderIngredients.map(el => el._id));
     if (result.success) {
       dispatch(orderIngredientsSuccess(result.order.number));
@@ -54,5 +55,5 @@ export const sendOrderThunk = () => (dispatch: AppDispatch, getStore: () => Root
     }
     return;
   };
-  handleRequest(sendOrder, 0);
+  handleRequest(sendOrder, 2000);
 }

@@ -11,6 +11,7 @@ export interface OrderState {
     status: boolean,
     response: string,
   };
+  showModalOrder: boolean;
 }
 
 const initialState: OrderState = {
@@ -21,7 +22,8 @@ const initialState: OrderState = {
   orderIngredientsFailed: {
   status: false,
   response: '',
-  },
+},
+showModalOrder: false,
 }
 
 export const orderSlice = createSlice({
@@ -33,6 +35,7 @@ export const orderSlice = createSlice({
       state.orderResponse = null;
     },
     orderIngredientsFetched: (state) => {
+      state.showModalOrder = true;
       state.orderIngredientsFetched = true;
     },
     orderIngredientsSuccess: (state, action: PayloadAction<number>) => {
@@ -46,6 +49,7 @@ export const orderSlice = createSlice({
       state.orderIngredientsFailed.response = action.payload;
     },
     closeModal: (state) => {
+      state.showModalOrder = false;
       state.orderIngredientsSuccess = false;
       state.orderIngredientsFailed.status = false;
     }

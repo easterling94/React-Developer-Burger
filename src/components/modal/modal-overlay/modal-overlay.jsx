@@ -5,7 +5,7 @@ import styles from './modal-overlay.module.css';
 
 export const ModalOverlay = ({closeModal, children}) => {
   const showModal = useAppSelector(store => store.ingredients.showModal);
-  const orderIngredientsSuccess = useAppSelector(store => store.order.orderIngredientsSuccess);
+  const showModalOrder = useAppSelector(store => store.order.showModalOrder);
 
   useEffect(() => {
     const closeModalAdjusted = (e) => {
@@ -18,7 +18,7 @@ export const ModalOverlay = ({closeModal, children}) => {
   },[]);
 
   return (
-    (showModal || orderIngredientsSuccess) ?
+    (showModal || showModalOrder) ?
     <div id='modalOverlay' className={styles.overlay} onClick={(e) => closeModal(e)}>
       {children}
     </div>
