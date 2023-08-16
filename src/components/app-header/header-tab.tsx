@@ -1,7 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { ICON_TYPES } from '../../utils/consts';
 import { HEADER_TABS } from '../../utils/consts';
-import PropTypes from 'prop-types';
 import { useAppSelector } from '../../store/store';
 import styles from './header.module.scss';
 import { TIconProps } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils';
@@ -44,12 +43,4 @@ export const HeaderTab = ({ type }: Tab) => {
       </div>
     </NavLink>
   );
-};
-
-HeaderTab.propTypes = {
-  type: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    icon: PropTypes.elementType.isRequired,
-  }),
 };
