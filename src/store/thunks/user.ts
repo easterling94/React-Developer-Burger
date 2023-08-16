@@ -24,6 +24,7 @@ import {
   getCookie,
   setCookie,
 } from '../../utils/cookie';
+import { closeModal } from '../slices/orderSlice';
 
 export const sendRegisterRequestThunk = (name: string, email: string, password: string) => (dispatch: AppDispatch) => {
   sendRegisterRequestAPI(name, email, password)
@@ -48,6 +49,7 @@ export const sendLoginUserThunk = (email: string, password: string) => (dispatch
     localStorage.setItem('refreshToken', refreshToken);
     setCookie('accessToken', authToken);
     dispatch(updateUser(data.user));
+    dispatch(closeModal());
     return data
   })
   .catch(handleNetworkError);

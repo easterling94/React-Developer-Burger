@@ -1,5 +1,7 @@
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-export const ICON_TYPES = {
+import { TIconTypesObj } from './sharedTypes';
+
+export const ICON_TYPES: TIconTypesObj = {
   primary: 'primary',
   secondary: 'secondary',
   error: 'error',
@@ -21,10 +23,10 @@ export const INGREDIENTS_TYPES = [
   }
 ];
 
-export const CONSTRUCTOR_ITEM_POSITIONS = {
-  top: 'top',
-  bottom: 'bottom',
-  notBun: 'notBun'
+export enum CONSTRUCTOR_ITEM_POSITIONS {
+  top ='top',
+  bottom = 'bottom',
+  notBun = 'notBun',
 };
 
 export const PATHS = {

@@ -1,11 +1,19 @@
-import { ingredientsPropsTypes } from '../../../utils/prop-types';
+import { Ingretient } from '../../../utils/sharedTypes';
 import styles from './ingredient-separate.module.scss';
 
-export const IngredientSeparate = ({ingredient}) => (
+type TIngredientSeparate = {
+  ingredient: Ingretient;
+};
+
+export const IngredientSeparate = ({ ingredient }: TIngredientSeparate) => (
   <div className={styles.card}>
     <h1 className={styles.header}>Детали ингредиента</h1>
     <div className={styles.img}>
-      <img className={styles.img} src={ingredient.image} alt={`Изображение ${ingredient.name}`}></img>
+      <img
+        className={styles.img}
+        src={ingredient.image}
+        alt={`Изображение ${ingredient.name}`}
+      ></img>
     </div>
     <h2 className={styles.name}>{ingredient.name}</h2>
     <section className={styles.section}>
@@ -27,8 +35,4 @@ export const IngredientSeparate = ({ingredient}) => (
       </div>
     </section>
   </div>
-)
-
-IngredientSeparate.propTypes = {
-  ingredient: ingredientsPropsTypes.isRequired,
-}
+);

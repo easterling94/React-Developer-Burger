@@ -39,6 +39,7 @@ export const orderSlice = createSlice({
       state.orderIngredientsFetched = true;
     },
     orderIngredientsSuccess: (state, action: PayloadAction<number>) => {
+      state.showModalOrder = true;
       state.orderIngredientsFetched = false;
       state.orderIngredientsSuccess = true;
       state.orderResponse = action.payload;
