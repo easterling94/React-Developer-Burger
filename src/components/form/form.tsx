@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import {
   PasswordInput,
   Input,
@@ -21,18 +21,18 @@ type TForm = {
 export const Form = ({ title, inputs, buttonTitle, hints }: TForm) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const onChange = (e: SyntheticEvent) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(changeInputThunk(e));
   };
 
-  const onSubmit = (e: SyntheticEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     dispatch(submitFormThunk(e, location.pathname));
   };
 
   const form = useAppSelector((state) => state.form);
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <h3 className={styles.title}>{title}</h3>
       {inputs.map((input) =>
         input.type === Type.password ? (
@@ -60,7 +60,6 @@ export const Form = ({ title, inputs, buttonTitle, hints }: TForm) => {
         htmlType='submit'
         type='primary'
         size='medium'
-        onClick={onSubmit}
         extraClass={styles.button}
       >
         {buttonTitle}

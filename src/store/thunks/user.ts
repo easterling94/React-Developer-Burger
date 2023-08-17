@@ -15,11 +15,6 @@ import {
   passwordReset,
 } from '../slices/userSlice';
 
-import { 
-  checkResponse,
-  handleNetworkError,
-} from '../../utils/api'
-
 import {
   getCookie,
   setCookie,
@@ -28,7 +23,6 @@ import { closeModal } from '../slices/orderSlice';
 
 export const sendRegisterRequestThunk = (name: string, email: string, password: string) => (dispatch: AppDispatch) => {
   sendRegisterRequestAPI(name, email, password)
-  .then(checkResponse)
   .then(data => {
     const authToken = data.accessToken.split('Bearer ')[1];
     const refreshToken = data.refreshToken;
@@ -37,12 +31,11 @@ export const sendRegisterRequestThunk = (name: string, email: string, password: 
     dispatch(updateUser(data.user))
     return data
   })
-  .catch(handleNetworkError);
+  .catch(() => 'Проблемы с сетью');
 }
 
 export const sendLoginUserThunk = (email: string, password: string) => (dispatch: AppDispatch) => {
   sendLoginUserAPI(email, password)
-  .then(checkResponse)
   .then(data => {
     const authToken = data.accessToken.split('Bearer ')[1];
     const refreshToken = data.refreshToken;
@@ -52,7 +45,7 @@ export const sendLoginUserThunk = (email: string, password: string) => (dispatch
     dispatch(closeModal());
     return data
   })
-  .catch(handleNetworkError);
+  .catch(() => 'Проблемы с сетью');
 }
 
 export const sendGetUserThunk = () => async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -78,35 +71,32 @@ export const sendUpdateUserThunk = (name: string, email: string) => (dispatch: A
 
 export const sendLogoutUserThunk = () => (dispatch: AppDispatch) => {
   sendLogoutUserAPI()
-  .then(checkResponse)
   .then(data => {
     setCookie('accessToken', null, { expires: -1 })
     localStorage.removeItem('refreshToken')
     alert('Вы успешно вышли из аккаунта')
     return data
   })
-  .catch(handleNetworkError);
+  .catch(() => 'Проблемы с сетью');
   dispatch(logoutUser())
 }
 
 export const sendForgotPasswordThunk = (email: string) => (dispatch: AppDispatch) => {
   sendForgotPasswordAPI(email)
-  .then(checkResponse)
   .then(data => {
     alert(`Пароль был выслан на почту ${email}`)
     dispatch(passwordReset());
     return data
   })
-  .catch(handleNetworkError)
+  .catch(() => 'Проблемы с сетью')
 }
 
 export const sendResetPasswordThunk = (password: string, code: string) => (dispatch: AppDispatch) => {
   sendResetPasswordAPI(password, code)
-  .then(checkResponse)
   .then(data => {
     alert('Пароль был успешно обновлен')
     dispatch(passwordReset());
     return data
   })
-  .catch(handleNetworkError)
+  .catch(() => 'Проблемы с сетью')
 }

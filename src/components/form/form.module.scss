@@ -19,6 +19,9 @@
   margin: 0px auto;
   margin-bottom: 80px;
 }
+.button:focus {
+  box-shadow: 0px 0px 20px #4C4CFF;
+}
 .redirect {
   text-align: center;
   margin-bottom: 16px;

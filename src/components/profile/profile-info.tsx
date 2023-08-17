@@ -2,7 +2,7 @@ import {
   Button,
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useState, SyntheticEvent } from 'react';
+import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { submitFormThunk } from '../../store/thunks/form';
 import { Name } from '../../utils/form';
 import { useAppSelector, useAppDispatch } from '../../store/store';
@@ -34,24 +34,24 @@ export const ProfileInfo = () => {
     }
   }, [form, user]);
 
-  const changeName = (e: SyntheticEvent) => {
+  const changeName = (e: ChangeEvent) => {
     dispatch(changeInputThunk(e));
   };
-  const changeEmail = (e: SyntheticEvent) => {
+  const changeEmail = (e: ChangeEvent) => {
     dispatch(changeInputThunk(e));
   };
-  const changePassword = (e: SyntheticEvent) => {
+  const changePassword = (e: ChangeEvent) => {
     dispatch(changeInputThunk(e));
   };
-  const onReset = (e: SyntheticEvent) => {
+  const onReset = (e: FormEvent) => {
     e.preventDefault();
     dispatch(changeInputThunk());
   };
-  const onSubmit = (e: SyntheticEvent) => {
+  const onSubmit = (e: FormEvent) => {
     dispatch(submitFormThunk(e, location.pathname));
   };
   return (
-    <div>
+    <form onReset={onReset} onSubmit={onSubmit}>
       <Input
         name={Name.name}
         type='text'
@@ -87,7 +87,6 @@ export const ProfileInfo = () => {
               type='primary'
               size='small'
               extraClass={styles.button}
-              onClick={onReset}
             >
               Вернуть
             </Button>
@@ -96,13 +95,12 @@ export const ProfileInfo = () => {
               type='primary'
               size='small'
               extraClass={styles.button}
-              onClick={onSubmit}
             >
               Сохранить
             </Button>
           </>
         ) : null}
       </div>
-    </div>
+    </form>
   );
 };

@@ -32,6 +32,7 @@ export const tossingIngredientThunk = (dragIndex: number, hoverIndex: number) =>
 export const sendOrderThunk = () => (dispatch: AppDispatch, getStore: () => RootState) => {
   const orderResponse = getStore().order.orderResponse;
   const orderIngredients = getStore().order.orderIngredients;
+  const user = getStore().user.user;
   if (orderResponse) {
     dispatch(orderIngredientsSuccess(orderResponse));
     return;
@@ -43,6 +44,9 @@ export const sendOrderThunk = () => (dispatch: AppDispatch, getStore: () => Root
   if (orderIngredients.filter(el => el.type !== 'bun').length === 0) {
     alert('Что за бургер без начинки?');
     return;
+  }
+  if (!user) {
+    return
   }
   dispatch(orderIngredientsFetched());
   const sendOrder = async () => {
