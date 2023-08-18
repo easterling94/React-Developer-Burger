@@ -30,12 +30,16 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  let background: string = location.state && location.state.background;
+
   useEffect(() => {
-    dispatch(getDataThunk());
+    if (background) {
+      dispatch(getDataThunk(location.pathname.slice(13)));
+    } else {
+      dispatch(getDataThunk());
+    }
     dispatch(sendGetUserThunk());
   }, [dispatch]);
-
-  let background: string = location.state && location.state.background;
 
   const closeModal = (): void => {
     dispatch(handleModal());
@@ -46,6 +50,11 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
+      {background && (
+        <Routes>
+          <Route path='ingredients/:id' element={<IngredientPage />} />
+        </Routes>
+      )}
       <Routes location={background}>
         <Route path={PATHS.home} element={<Main />}>
           <Route path={PATHS.home} element={<HomePage />} />
