@@ -52,6 +52,7 @@ export const sendGetUserThunk = () => async (dispatch: AppDispatch, getState: ()
   const accessToken = getCookie('accessToken');
   if (accessToken) {
     const data = await sendGetUserAPI();
+    if(!data.success) return
     dispatch(updateUser(data.user));
   }
 }

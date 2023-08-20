@@ -42,14 +42,14 @@ export const Item = ({ item }: TItem) => {
 
   const handleClick = () => {
     dispatch(getDataThunk(ingredientId));
-    dispatch(handleModal());
+    dispatch(handleModal(true));
   };
 
   return (
     <Link
       key={ingredientId}
       to={`/ingredients/${ingredientId}`}
-      state={{ background: location }}
+      state={{ ingredientPage: location }}
       className={styles.link}
     >
       <div className={styles.item} ref={dragRef} style={{ opacity }}>

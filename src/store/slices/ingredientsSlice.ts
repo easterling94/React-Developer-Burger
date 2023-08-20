@@ -53,14 +53,17 @@ export const ingredientsSlice = createSlice({
       state.requestIngredientsFetched = false;
       state.requestIngredientsSuccess = true;
     },
-    handleModal: (state) => {
-      state.showModal = !state.showModal
+    deleteIngredientSeparate: (state) => {
+      state.ingredientSeparate = null;
+    },
+    handleModal: (state, action: PayloadAction<boolean>) => {
+      state.showModal = action.payload
     },
   }
 });
 
 const { actions, reducer } = ingredientsSlice;
 
-export const { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError, switchIngredientsTab, requestIngredientSeparateSuccess, handleModal } = actions
+export const { requestIngredientsFetch, requestIngredientsSuccess, requestIngredientsError, switchIngredientsTab, requestIngredientSeparateSuccess, deleteIngredientSeparate, handleModal } = actions
 
 export default reducer

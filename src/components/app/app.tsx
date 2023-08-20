@@ -30,7 +30,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  let background: string = location.state && location.state.background;
+  const background = location.state?.ingredientPage || location;
 
   useEffect(() => {
     if (background) {
@@ -42,7 +42,7 @@ function App() {
   }, [dispatch]);
 
   const closeModal = (): void => {
-    dispatch(handleModal());
+    dispatch(handleModal(false));
     navigate(-1);
     return;
   };
@@ -50,14 +50,10 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      {background && (
-        <Routes>
-          <Route path='ingredients/:id' element={<IngredientPage />} />
-        </Routes>
-      )}
       <Routes location={background}>
         <Route path={PATHS.home} element={<Main />}>
           <Route path={PATHS.home} element={<HomePage />} />
+          <Route path='ingredients/:id' element={<IngredientPage />} />
           <Route
             path={PATHS.login}
             element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />}
@@ -78,7 +74,6 @@ function App() {
               <ProtectedRoute onlyUnAuth element={<PasswordResetPage />} />
             }
           />
-          <Route path='ingredients/:id' element={<IngredientPage />} />
           <Route
             path={PATHS.profile}
             element={<ProtectedRoute element={<Profile />} />}
@@ -99,7 +94,7 @@ function App() {
           <Route path={PATHS.error} element={<ErrorPage />} />
         </Route>
       </Routes>
-      {background && (
+      {location.state?.ingredientPage && (
         <Routes>
           <Route
             path='ingredients/:id'

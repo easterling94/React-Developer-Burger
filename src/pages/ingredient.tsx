@@ -7,16 +7,14 @@ import { IngredientSeparate } from '../components/constructor/burger-ingredients
 export const IngredientPage = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const ingredient = useAppSelector(store => store.ingredients.ingredientSeparate);
+  const ingredient = useAppSelector(
+    (store) => store.ingredients.ingredientSeparate
+  );
 
   useEffect(() => {
-    const id = location.pathname.slice(13)
-    dispatch(getDataThunk(id))
-  }, [dispatch])
+    const id = location.pathname.slice(13);
+    dispatch(getDataThunk(id));
+  }, [dispatch]);
 
-  return (
-    ingredient ? 
-    <IngredientSeparate ingredient={ingredient}/>
-    : null
-  )
-}
+  return ingredient ? <IngredientSeparate ingredient={ingredient} /> : null;
+};

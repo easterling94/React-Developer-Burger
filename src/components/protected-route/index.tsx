@@ -1,7 +1,6 @@
 import { useAppSelector } from '../../store/store';
 import { Navigate, useLocation } from 'react-router-dom';
 import { PATHS } from '../../utils/consts';
-import { FC } from 'react';
 
 type TProtectedRoute = {
   onlyUnAuth?: boolean;
