@@ -6,7 +6,7 @@ import { wsMessage } from '../../store/slices/wsSlice';
 export const websocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
-    return (next: any) => (action: any) => {
+    return next => action => {
 
       const { type } = action;
       const { dispatch } = store;

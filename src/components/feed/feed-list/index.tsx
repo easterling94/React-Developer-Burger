@@ -15,12 +15,7 @@ export const FeedList = () => {
     );
   }
   const location = useLocation().pathname;
-  const background =
-    location === PATHS.feed
-      ? 'feed'
-      : location === PATHS.profileOrders
-      ? 'profile'
-      : null;
+  const background = location === PATHS.FEED ? 'feed' : 'profile';
   return (
     <section className={section.section}>
       <div className={styles.itemsList}>

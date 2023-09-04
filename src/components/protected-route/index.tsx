@@ -21,7 +21,7 @@ export const ProtectedRoute = ({
   }
 
   if (!onlyUnAuth && !user) {
-    return <Navigate to={PATHS.login} state={{ from: location }} />;
+    return <Navigate to={PATHS.LOGIN} state={{ from: location }} />;
   }
 
   if (!onlyUnAuth && user) {

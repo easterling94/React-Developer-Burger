@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useAppSelector } from '../../../store/store';
 import { OrderFeed } from '../../../utils/sharedTypes';
 import section from '../section.module.scss';
@@ -8,14 +9,19 @@ export const FeedStat = () => {
     (store) => store.websocket.data
   );
 
-  const ordersReady = orders
-    .filter((order: OrderFeed) => order.status === 'done')
-    .slice(0, 10)
-    .map((order: OrderFeed) => order.number);
-  const ordersPending = orders
-    .filter((order: OrderFeed) => order.status === 'pending')
-    .slice(0, 10)
-    .map((order: OrderFeed) => order.number);
+  const ordersReady = useMemo(() => {
+    return orders
+      .filter((order: OrderFeed) => order.status === 'done')
+      .slice(0, 10)
+      .map((order: OrderFeed) => order.number);
+  }, [orders]);
+
+  const ordersPending = useMemo(() => {
+    return orders
+      .filter((order: OrderFeed) => order.status === 'pending')
+      .slice(0, 10)
+      .map((order: OrderFeed) => order.number);
+  }, [orders]);
 
   return (
     <section className={section.section}>

@@ -9,11 +9,13 @@ export const ProfileLogout = () => {
   const navigate = useNavigate();
   const onClick = () => {
     dispatch(sendLogoutUserThunk());
-    navigate(PATHS.login);
-  }
+    navigate(PATHS.LOGIN);
+  };
   return (
     <div>
-      <Button htmlType='button' onClick={onClick}>Выход</Button>
+      <Button htmlType='button' onClick={onClick}>
+        Выход
+      </Button>
     </div>
-  )
-}
+  );
+};

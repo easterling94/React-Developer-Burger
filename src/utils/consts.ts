@@ -31,34 +31,34 @@ export enum CONSTRUCTOR_ITEM_POSITIONS {
 };
 
 export const PATHS = {
-  home: '/',
-  feed: '/feed',
-  ingredients: '/ingredients',
-  profile: '/profile',
-  profileInfo: '/profile',
-  profileOrders: '/profile/orders',
-  profileLogout: '/profile/logout',
-  login: '/login',
-  register: '/register',
-  passwordForgot: '/forgot-password',
-  passwordReset: '/reset-password',
+  HOME: '/',
+  FEED: '/feed',
+  INGREDIENTS: '/ingredients',
+  PROFILE: '/profile',
+  PROFILEINFO: '/profile',
+  PROFILEORDERS: '/profile/orders',
+  PROFILELOGOUT: '/profile/logout',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  PASSWORDFORGOT: '/forgot-password',
+  PASSWORDRESET: '/reset-password',
   error: '*'
 };
 
 export const HEADER_TABS = {
   constructor: {
     name: 'Конструктор',
-    link: PATHS.home,
+    link: PATHS.HOME,
     icon: BurgerIcon,
   },
   feed: {
     name: 'Лента заказов',
-    link: PATHS.feed,
+    link: PATHS.FEED,
     icon: ListIcon,
   },
   profile: {
     name: 'Личный кабинет',
-    link: PATHS.profileInfo,
+    link: PATHS.PROFILEINFO,
     icon: ProfileIcon,
   }
 };

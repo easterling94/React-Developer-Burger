@@ -60,57 +60,57 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background}>
-        <Route path={PATHS.home} element={<Main />}>
-          <Route path={PATHS.home} element={<HomePage />} />
-          <Route path={PATHS.feed} element={<FeedPage />} />
+        <Route path={PATHS.HOME} element={<Main />}>
+          <Route path={PATHS.HOME} element={<HomePage />} />
+          <Route path={PATHS.FEED} element={<FeedPage />} />
           <Route
-            path={`${PATHS.feed}/:id`}
+            path={`${PATHS.FEED}/:id`}
             element={<OrderPage type='feed' />}
           />
           <Route
-            path={`${PATHS.ingredients}/:id`}
+            path={`${PATHS.INGREDIENTS}/:id`}
             element={<IngredientPage />}
           />
           <Route
-            path={PATHS.login}
+            path={PATHS.LOGIN}
             element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />}
           />
           <Route
-            path={PATHS.register}
+            path={PATHS.REGISTER}
             element={<ProtectedRoute onlyUnAuth element={<RegisterPage />} />}
           />
           <Route
-            path={PATHS.passwordForgot}
+            path={PATHS.PASSWORDFORGOT}
             element={
               <ProtectedRoute onlyUnAuth element={<PasswordForgotPage />} />
             }
           />
           <Route
-            path={PATHS.passwordReset}
+            path={PATHS.PASSWORDRESET}
             element={
               <ProtectedRoute onlyUnAuth element={<PasswordResetPage />} />
             }
           />
           <Route
-            path={PATHS.profile}
+            path={PATHS.PROFILE}
             element={<ProtectedRoute element={<Profile />} />}
           >
             <Route
-              path={PATHS.profileInfo}
+              path={PATHS.PROFILEINFO}
               element={<ProtectedRoute element={<ProfileInfoPage />} />}
             />
             <Route
-              path={PATHS.profileOrders}
+              path={PATHS.PROFILEORDERS}
               element={<ProtectedRoute element={<ProfileOrdersPage />} />}
             />
             <Route
-              path={`${PATHS.profileOrders}/:id`}
+              path={`${PATHS.PROFILEORDERS}/:id`}
               element={
                 <ProtectedRoute element={<OrderPage type='profile' />} />
               }
             />
             <Route
-              path={PATHS.profileLogout}
+              path={PATHS.PROFILELOGOUT}
               element={<ProtectedRoute element={<ProfileLogoutPage />} />}
             />
           </Route>
@@ -120,7 +120,7 @@ function App() {
       {location.state?.ingredientPage && (
         <Routes>
           <Route
-            path={`${PATHS.ingredients}/:id`}
+            path={`${PATHS.INGREDIENTS}/:id`}
             element={
               <Modal closeModal={closeModal}>
                 <ModalIngredient />
@@ -132,7 +132,7 @@ function App() {
       {location.state?.locationProfileFeed && (
         <Routes>
           <Route
-            path={`${PATHS.feed}/:id`}
+            path={`${PATHS.FEED}/:id`}
             element={
               <Modal closeModal={closeModal}>
                 <OrderHistory />
@@ -144,7 +144,7 @@ function App() {
       {location.state?.locationProfileOrders && (
         <Routes>
           <Route
-            path={`${PATHS.profileOrders}/:id`}
+            path={`${PATHS.PROFILEORDERS}/:id`}
             element={
               <Modal closeModal={closeModal}>
                 <OrderHistory />

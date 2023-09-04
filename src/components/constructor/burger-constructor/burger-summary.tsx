@@ -34,7 +34,7 @@ export function BurgerConstructorSummary() {
 
   const sendOrderToServer = async () => {
     if (!user) {
-      navigate(PATHS.login);
+      navigate(PATHS.LOGIN);
     }
     dispatch(sendOrderThunk());
   };

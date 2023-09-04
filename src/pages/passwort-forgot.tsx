@@ -6,22 +6,35 @@ import { PATHS } from '../utils/consts';
 import { useEffect } from 'react';
 
 export const PasswordForgotPage = () => {
-  const { passwordReset }= useAppSelector(store => store.user);
+  const { passwordReset } = useAppSelector((store) => store.user);
   const navigate = useNavigate();
   useEffect(() => {
     if (passwordReset) {
-      navigate(PATHS.passwordReset)
-    } else return
-  }, [passwordReset])
+      navigate(PATHS.PASSWORDRESET);
+    } else return;
+  }, [passwordReset]);
 
   const inputs = [
-    generateInput({placeholder: 'E-mail', name: Name.email, type: Type.email})
-  ]
+    generateInput({
+      placeholder: 'E-mail',
+      name: Name.email,
+      type: Type.email,
+    }),
+  ];
 
   const hints = [
-    generateHint({link: '/login', question: 'Вспомнили пароль?', answer: 'Войти'})
-  ]
+    generateHint({
+      link: '/login',
+      question: 'Вспомнили пароль?',
+      answer: 'Войти',
+    }),
+  ];
   return (
-    <Form title='Восстановление пароля' inputs={inputs} buttonTitle='Восстановить' hints={hints}/>
-  )
-}
+    <Form
+      title='Восстановление пароля'
+      inputs={inputs}
+      buttonTitle='Восстановить'
+      hints={hints}
+    />
+  );
+};

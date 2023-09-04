@@ -17,6 +17,19 @@ type TFeedItem = {
 };
 
 export const FeedItem = ({ order, background }: TFeedItem) => {
+  const assignStatus = (status: string) => {
+    switch (status) {
+      case 'done':
+        return 'Выполнен';
+      case 'pending':
+        return 'Готовится';
+      case 'created':
+        return 'Создан';
+      default:
+        return null;
+    }
+  };
+  const status = assignStatus(order.status);
   const dispatch = useAppDispatch();
   const handleClick = () => {
     dispatch(wsHandleModal(true));
@@ -25,20 +38,13 @@ export const FeedItem = ({ order, background }: TFeedItem) => {
   const { totalPrice, images, namePrepared } = usePrepareOrderFeed(order);
   const link =
     background === 'feed'
-      ? `${PATHS.feed}/${order._id}`
-      : `${PATHS.profileOrders}/${order._id}`;
+      ? `${PATHS.FEED}/${order._id}`
+      : `${PATHS.PROFILEORDERS}/${order._id}`;
   const state =
     background === 'feed'
       ? { locationProfileFeed: location }
       : { locationProfileOrders: location };
-  const status =
-    order.status === 'done'
-      ? 'Выполнен'
-      : order.status === 'pending'
-      ? 'Готовится'
-      : order.status === 'created'
-      ? 'Создан'
-      : null;
+
   return images ? (
     <div className={`${styles.order}`} onClick={handleClick}>
       <Link className={styles.link} to={link} state={state}>
@@ -51,7 +57,7 @@ export const FeedItem = ({ order, background }: TFeedItem) => {
         <h3 className={styles.name}>{namePrepared}</h3>
         {background === 'profile' ? (
           status === 'Выполнен' ? (
-            <p style={{ color: '#0CC' }}>{status}</p>
+            <p className={styles.ready}>{status}</p>
           ) : (
             <p>{status}</p>
           )

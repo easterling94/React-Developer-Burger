@@ -45,19 +45,19 @@ export const submitFormThunk = (e: SyntheticEvent, location: string) => (dispatc
   e.preventDefault();
   const { name, email, password, code} = getState().form;
   switch(location) {
-    case PATHS.register:
+    case PATHS.REGISTER:
       dispatch(sendRegisterRequestThunk(name, email, password));
       return
-    case PATHS.login:
+    case PATHS.LOGIN:
       dispatch(sendLoginUserThunk(email, password));
       return
-    case PATHS.passwordForgot:
+    case PATHS.PASSWORDFORGOT:
       dispatch(sendForgotPasswordThunk(email))
       return
-    case PATHS.passwordReset:
+    case PATHS.PASSWORDRESET:
       dispatch(sendResetPasswordThunk(password, code))
       return
-    case PATHS.profile:
+    case PATHS.PROFILE:
       dispatch(sendUpdateUserThunk(name, email))
   }
 }
