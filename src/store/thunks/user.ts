@@ -13,6 +13,7 @@ import {
   updateUser, 
   logoutUser,
   passwordReset,
+  checkUser,
 } from '../slices/userSlice';
 
 import {
@@ -53,6 +54,7 @@ export const sendGetUserThunk = () => async (dispatch: AppDispatch, getState: ()
   if (accessToken) {
     const data = await sendGetUserAPI();
     if(!data.success) return
+    dispatch(checkUser(true));
     dispatch(updateUser(data.user));
   }
 }

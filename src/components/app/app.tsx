@@ -1,7 +1,7 @@
 import { AppHeader } from '../app-header/app-header';
 import { Main } from './main';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { getDataThunk } from '../../store/thunks/requestIngredients';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import styles from './app.module.scss';
@@ -30,6 +30,11 @@ import { ModalIngredient } from '../modal/ingredients/ingredient';
 import { OrderHistory } from '../modal/order-history/order-history';
 
 function App() {
+  const { userChecked } = useAppSelector((store) => store.user);
+
+  useEffect(() => {
+    console.log('APP');
+  }, []);
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,12 +46,12 @@ function App() {
     location;
 
   useEffect(() => {
+    dispatch(sendGetUserThunk());
     if (background) {
       dispatch(getDataThunk(location.pathname.slice(13)));
     } else {
       dispatch(getDataThunk());
     }
-    dispatch(sendGetUserThunk());
   }, [dispatch]);
 
   const closeModal = (): void => {
@@ -91,29 +96,31 @@ function App() {
               <ProtectedRoute onlyUnAuth element={<PasswordResetPage />} />
             }
           />
-          <Route
-            path={PATHS.PROFILE}
-            element={<ProtectedRoute element={<Profile />} />}
-          >
+          {userChecked ? (
             <Route
-              path={PATHS.PROFILEINFO}
-              element={<ProtectedRoute element={<ProfileInfoPage />} />}
-            />
-            <Route
-              path={PATHS.PROFILEORDERS}
-              element={<ProtectedRoute element={<ProfileOrdersPage />} />}
-            />
-            <Route
-              path={`${PATHS.PROFILEORDERS}/:id`}
-              element={
-                <ProtectedRoute element={<OrderPage type='profile' />} />
-              }
-            />
-            <Route
-              path={PATHS.PROFILELOGOUT}
-              element={<ProtectedRoute element={<ProfileLogoutPage />} />}
-            />
-          </Route>
+              path={PATHS.PROFILE}
+              element={<ProtectedRoute element={<Profile />} />}
+            >
+              <Route
+                path={PATHS.PROFILEINFO}
+                element={<ProtectedRoute element={<ProfileInfoPage />} />}
+              />
+              <Route
+                path={PATHS.PROFILEORDERS}
+                element={<ProtectedRoute element={<ProfileOrdersPage />} />}
+              />
+              <Route
+                path={`${PATHS.PROFILEORDERS}/:id`}
+                element={
+                  <ProtectedRoute element={<OrderPage type='profile' />} />
+                }
+              />
+              <Route
+                path={PATHS.PROFILELOGOUT}
+                element={<ProtectedRoute element={<ProfileLogoutPage />} />}
+              />
+            </Route>
+          ) : null}
           <Route path={PATHS.error} element={<ErrorPage />} />
         </Route>
       </Routes>

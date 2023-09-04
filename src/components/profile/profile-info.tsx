@@ -11,6 +11,10 @@ import styles from './index.module.scss';
 import { useLocation } from 'react-router-dom';
 
 export const ProfileInfo = () => {
+  useEffect(() => {
+    console.log('PROFILE INFO');
+  }, []);
+
   const form = useAppSelector((store) => store.form);
   const user = useAppSelector((store) => store.user.user);
   const dispatch = useAppDispatch();

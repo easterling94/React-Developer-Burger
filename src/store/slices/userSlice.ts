@@ -12,12 +12,14 @@ export interface User {
   } | null;
   userAuthorized: boolean,
   passwordReset: boolean,
+  userChecked: boolean,
 }
 
 const initialState: User = {
   user: null,
   userAuthorized: false,
   passwordReset: false,
+  userChecked: false,
 }
 
 export const userSlice = createSlice({
@@ -34,6 +36,9 @@ export const userSlice = createSlice({
     },
     passwordReset: (state) => {
       state.passwordReset = !state.passwordReset;
+    },
+    checkUser: (state, action: PayloadAction<boolean>) => {
+      state.userChecked = action.payload;
     }
   }
 })
@@ -44,6 +49,7 @@ export const {
   updateUser, 
   logoutUser,
   passwordReset,
+  checkUser
 } = actions;
 
 export default reducer;
