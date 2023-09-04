@@ -22,3 +22,25 @@ export type UniqueIdIngredient = Ingretient & {
 };
 
 export type TIconTypesObj = { [key in TIconProps['type']]: key };
+
+export type OrderFeed = {
+  _id: string;
+  ingredients: ReadonlyArray<string>;
+  status: 'created' | 'done' | 'pending';
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+}
+
+export type websocketData = {
+  success: true | false;
+  orders?: ReadonlyArray<OrderFeed>;
+  total?: number;
+  totalToday?: number;
+}
+
+export type OrderImages = {
+  source: string;
+  alt: string;
+}

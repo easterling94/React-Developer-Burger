@@ -1,0 +1,122 @@
+@import '../../../assets/styles/styles-vars.scss';
+
+.card {
+  width: 520px;
+  margin: 50px auto;
+}
+.number {
+  font-family: $fontIceland;
+  text-align: center;
+  font-family: $fontIceland;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.name {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  margin: 0px;
+}
+.status {
+  color: var(--interface-success, #0CC);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 12px;
+  margin-bottom: 40px;
+}
+.compose {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+}
+.itemsList {
+  height: 200px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-right: 24px;
+}
+.itemsList::-webkit-scrollbar {
+  width: 8px;
+}
+.itemsList::-webkit-scrollbar-track {
+  background-color: #2F2F37;
+}
+.itemsList::-webkit-scrollbar-thumb{
+  background-color: #8585AD;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.containerInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.imageBorder {
+  position: relative;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 2px solid #801AB2;
+  width: 64px;
+  height: 64px;
+  background: #131316;
+}
+.image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  width: 112px;
+  height: 56px;
+}
+.ingredientName {
+  color: var(--text-primary-light-standart-text, #F2F2F3);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0px;
+  margin-left: 16px;
+}
+.meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.date {
+  color: var(--text-dark-grey-secondary-text, #8585AD);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.totalPrice {
+  color: var(--text-primary-light-standart-text, #F2F2F3);
+  text-align: right;
+  font-family: $fontIceland;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: nowrap;
+}

@@ -1,5 +1,6 @@
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TIconTypesObj } from './sharedTypes';
+import { wsName } from '../store/slices/wsSlice';
 
 export const ICON_TYPES: TIconTypesObj = {
   primary: 'primary',
@@ -31,7 +32,8 @@ export enum CONSTRUCTOR_ITEM_POSITIONS {
 
 export const PATHS = {
   home: '/',
-  orders: '/orders',
+  feed: '/feed',
+  ingredients: '/ingredients',
   profile: '/profile',
   profileInfo: '/profile',
   profileOrders: '/profile/orders',
@@ -49,9 +51,9 @@ export const HEADER_TABS = {
     link: PATHS.home,
     icon: BurgerIcon,
   },
-  orders: {
+  feed: {
     name: 'Лента заказов',
-    link: PATHS.orders,
+    link: PATHS.feed,
     icon: ListIcon,
   },
   profile: {
@@ -60,3 +62,10 @@ export const HEADER_TABS = {
     icon: ProfileIcon,
   }
 };
+
+export const WS_TYPES = {
+  WS_START: wsName + '/wsStart',
+  WS_ERROR: wsName + '/wsError',
+  WS_CLOSE: wsName + '/wsClose',
+  WS_MESSAGE: wsName + '/wsMessage',
+}

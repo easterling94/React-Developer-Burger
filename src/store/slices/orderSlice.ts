@@ -20,10 +20,10 @@ const initialState: OrderState = {
   orderIngredientsFetched: false,
   orderIngredientsSuccess: false,
   orderIngredientsFailed: {
-  status: false,
-  response: '',
-},
-showModalOrder: false,
+    status: false,
+    response: '',
+    },
+  showModalOrder: false,
 }
 
 export const orderSlice = createSlice({

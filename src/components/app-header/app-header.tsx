@@ -7,13 +7,13 @@ export const AppHeader = () => (
   <header className={styles.header}>
     <nav className={styles.nav}>
       <div className={styles.leftBlock}>
-        <HeaderTab type={HEADER_TABS.constructor}/>
-        <HeaderTab type={HEADER_TABS.orders}/>
+        <HeaderTab type={HEADER_TABS.constructor} />
+        <HeaderTab type={HEADER_TABS.feed} />
       </div>
       <div className={styles.centerBlock}>
         <Logo />
       </div>
-      <HeaderTab type={HEADER_TABS.profile}/>
+      <HeaderTab type={HEADER_TABS.profile} />
     </nav>
   </header>
-)
+);

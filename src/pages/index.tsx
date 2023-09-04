@@ -8,16 +8,20 @@ import { ProfileLogoutPage } from './profile-logout';
 import { ProfileOrdersPage } from './profile-orders';
 import { ErrorPage } from './error';
 import { IngredientPage } from './ingredient';
+import { FeedPage } from './feed';
+import { OrderPage } from './order';
 
-export { 
-  HomePage, 
-  LoginPage, 
+export {
+  HomePage,
+  LoginPage,
   RegisterPage,
-  PasswordForgotPage, 
-  PasswordResetPage, 
-  ProfileInfoPage, 
-  ProfileLogoutPage, 
-  ProfileOrdersPage, 
+  PasswordForgotPage,
+  PasswordResetPage,
+  ProfileInfoPage,
+  ProfileLogoutPage,
+  ProfileOrdersPage,
   ErrorPage,
   IngredientPage,
+  FeedPage,
+  OrderPage,
 };

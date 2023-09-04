@@ -10,6 +10,8 @@ export const BASE_URL_TOKEN = '/auth/token';
 export const BASE_URL_UPDATE_USER = '/auth/user'
 export const BASE_URL_FORGOT_PASSWORD = '/password-reset';
 export const BASE_URL_RESET_PASSWORD = '/password-reset/reset';
+export const BASE_WS = 'wss://norma.nomoreparties.space/orders';
+export const WS_ALL =  BASE_WS + '/all';
 
 export const checkResponse = async (data: Response) => {
   if(data && data.ok) {

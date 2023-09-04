@@ -19,18 +19,26 @@ import {
   ProfileOrdersPage,
   ErrorPage,
   IngredientPage,
+  FeedPage,
+  OrderPage,
 } from '../../pages';
 import { sendGetUserThunk } from '../../store/thunks/user';
 import { handleModal } from '../../store/slices/ingredientsSlice';
+import { wsHandleModal } from '../../store/slices/wsSlice';
 import { Modal } from '../modal';
 import { ModalIngredient } from '../modal/ingredients/ingredient';
+import { OrderHistory } from '../modal/order-history/order-history';
 
 function App() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const background = location.state?.ingredientPage || location;
+  const background =
+    location.state?.ingredientPage ||
+    location.state?.locationProfileFeed ||
+    location.state?.locationProfileOrders ||
+    location;
 
   useEffect(() => {
     if (background) {
@@ -43,6 +51,7 @@ function App() {
 
   const closeModal = (): void => {
     dispatch(handleModal(false));
+    dispatch(wsHandleModal(false));
     navigate(-1);
     return;
   };
@@ -53,7 +62,15 @@ function App() {
       <Routes location={background}>
         <Route path={PATHS.home} element={<Main />}>
           <Route path={PATHS.home} element={<HomePage />} />
-          <Route path='ingredients/:id' element={<IngredientPage />} />
+          <Route path={PATHS.feed} element={<FeedPage />} />
+          <Route
+            path={`${PATHS.feed}/:id`}
+            element={<OrderPage type='feed' />}
+          />
+          <Route
+            path={`${PATHS.ingredients}/:id`}
+            element={<IngredientPage />}
+          />
           <Route
             path={PATHS.login}
             element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />}
@@ -87,6 +104,12 @@ function App() {
               element={<ProtectedRoute element={<ProfileOrdersPage />} />}
             />
             <Route
+              path={`${PATHS.profileOrders}/:id`}
+              element={
+                <ProtectedRoute element={<OrderPage type='profile' />} />
+              }
+            />
+            <Route
               path={PATHS.profileLogout}
               element={<ProtectedRoute element={<ProfileLogoutPage />} />}
             />
@@ -97,10 +120,34 @@ function App() {
       {location.state?.ingredientPage && (
         <Routes>
           <Route
-            path='ingredients/:id'
+            path={`${PATHS.ingredients}/:id`}
             element={
               <Modal closeModal={closeModal}>
                 <ModalIngredient />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {location.state?.locationProfileFeed && (
+        <Routes>
+          <Route
+            path={`${PATHS.feed}/:id`}
+            element={
+              <Modal closeModal={closeModal}>
+                <OrderHistory />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {location.state?.locationProfileOrders && (
+        <Routes>
+          <Route
+            path={`${PATHS.profileOrders}/:id`}
+            element={
+              <Modal closeModal={closeModal}>
+                <OrderHistory />
               </Modal>
             }
           />

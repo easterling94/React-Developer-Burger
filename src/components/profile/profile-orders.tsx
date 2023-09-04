@@ -1,5 +1,6 @@
+import { FeedList } from '../feed/feed-list';
 export const ProfileOrders = () => (
   <div>
-    ORDERS
+    <FeedList />
   </div>
-)
+);

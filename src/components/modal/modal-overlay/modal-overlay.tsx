@@ -14,6 +14,9 @@ type KeyboardEvent = {
 export const ModalOverlay = ({ closeModal, children }: TModalOverlay) => {
   const showModal = useAppSelector((store) => store.ingredients.showModal);
   const showModalOrder = useAppSelector((store) => store.order.showModalOrder);
+  const showModalWebsocket = useAppSelector(
+    (store) => store.websocket.showWSModal
+  );
 
   useEffect(() => {
     const handleEscPress = (e: KeyboardEvent) => {
@@ -27,7 +30,7 @@ export const ModalOverlay = ({ closeModal, children }: TModalOverlay) => {
     };
   }, [closeModal]);
 
-  return showModal || showModalOrder ? (
+  return showModal || showModalOrder || showModalWebsocket ? (
     <div id='modalOverlay' className={styles.overlay} onClick={closeModal}>
       {children}
     </div>

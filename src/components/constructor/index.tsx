@@ -1,8 +1,8 @@
-import { BurgerIngredients } from './burger-ingredients/burger-ingredients'
-import { BurgerConstructor } from './burger-constructor'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import styles from './index.module.scss'
+import { BurgerIngredients } from './burger-ingredients/burger-ingredients';
+import { BurgerConstructor } from './burger-constructor';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import styles from './index.module.scss';
 
 export const ConstructorIndex = () => (
   <>
@@ -14,4 +14,4 @@ export const ConstructorIndex = () => (
       </DndProvider>
     </div>
   </>
-)
+);
