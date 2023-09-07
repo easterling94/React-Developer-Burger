@@ -1,11 +1,7 @@
 import { Form } from '../components/form/form';
 import { generateInput, Name, Type, generateHint } from '../utils/form';
-import { useEffect } from 'react';
 
 export const LoginPage = () => {
-  useEffect(() => {
-    console.log('LOGIN');
-  }, []);
   const inputs = [
     generateInput({
       placeholder: 'E-mail',

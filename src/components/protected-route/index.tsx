@@ -1,8 +1,7 @@
+import { useState } from 'react';
 import { useAppSelector } from '../../store/store';
 import { Navigate, useLocation } from 'react-router-dom';
 import { PATHS } from '../../utils/consts';
-import { useEffect } from 'react';
-import { getCookie } from '../../utils/cookie';
 
 type TProtectedRoute = {
   onlyUnAuth?: boolean;
@@ -13,13 +12,7 @@ export const ProtectedRoute = ({
   onlyUnAuth = false,
   element,
 }: TProtectedRoute) => {
-  const token = getCookie('accessToken');
-
-  const { user } = useAppSelector((store) => store.user);
-
-  useEffect(() => {
-    console.log('PROTECTED ROUTE', user);
-  }, []);
+  const { user, userAuthorized } = useAppSelector((store) => store.user);
 
   const location = useLocation();
 
