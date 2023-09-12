@@ -22,7 +22,7 @@ const initialState: OrderState = {
   orderIngredientsFailed: {
     status: false,
     response: '',
-    },
+  },
   showModalOrder: false,
 }
 
