@@ -1,5 +1,5 @@
 {
-  "homepage": "https://easterling94.github.io/React-Developer-Burger/",
+  "homepage": "https://easterling94.github.io/React-Developer-Burger",
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
@@ -34,7 +34,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +61,7 @@
     "cypress": "^13.1.0",
     "eslint-plugin-cypress": "^2.14.0",
     "fetch-mock": "^9.11.0",
+    "gh-pages": "^6.0.0",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4"
   }
