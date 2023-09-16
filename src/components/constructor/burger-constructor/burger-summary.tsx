@@ -59,6 +59,7 @@ export function BurgerConstructorSummary() {
         size='medium'
         onClick={sendOrderToServer}
         htmlType='button'
+        data-cy='submit-order'
       >
         Оформить заказ
       </Button>

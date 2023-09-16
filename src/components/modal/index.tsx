@@ -15,7 +15,11 @@ export const Modal = ({ closeModal, children }: TModal) =>
     <ModalOverlay closeModal={closeModal}>
       <div className={styles.modal}>
         <div className={styles.wrapper}>
-          <div id='modalCloseBtn' className={styles.closeBtn}>
+          <div
+            id='modalCloseBtn'
+            className={styles.closeBtn}
+            data-cy='modalCloseBtn'
+          >
             <CloseIcon type='primary' onClick={closeModal} />
           </div>
           {children}

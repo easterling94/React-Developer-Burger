@@ -31,7 +31,11 @@ export function BurgerBun({ type }: TBurgerBun) {
   return (
     <>
       {bun ? (
-        <div className={styles.itemBun} ref={dropTarget}>
+        <div
+          className={styles.itemBun}
+          ref={dropTarget}
+          data-cy='drop-area-bun'
+        >
           <ConstructorElement
             text={
               bun.name +
@@ -52,6 +56,7 @@ export function BurgerBun({ type }: TBurgerBun) {
       ) : (
         <div
           ref={dropTarget}
+          data-cy='drop-area-bun'
           className={`${isHover ? styles.bunEmptyOnHover : styles.bunEmpty}`}
         >
           Перетащите сюда выбранный тип булок

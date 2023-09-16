@@ -51,7 +51,8 @@ export const sendLoginUserThunk = (email: string, password: string) => (dispatch
 
 export const sendGetUserThunk = () => async (dispatch: AppDispatch, getState: () => RootState) => {
   const accessToken = getCookie('accessToken');
-  if (accessToken) {
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (accessToken || refreshToken) {
     const data = await sendGetUserAPI();
     if(!data.success) return
     dispatch(checkUser(true));

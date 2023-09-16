@@ -33,5 +33,3 @@ export const OrderDetails = ({
     </div>
   </div>
 );
-
-OrderDetails.propTypes = serverResponseOnOrder.isRequired;

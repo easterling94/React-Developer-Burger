@@ -23,6 +23,7 @@ export const Item = ({ item }: TItem) => {
   const [count, setCount] = useState(0);
   const location = useLocation();
   const ingredientId = item['_id'];
+  const ingredientType = item['type'];
 
   useEffect(() => {
     setCount(
@@ -51,6 +52,7 @@ export const Item = ({ item }: TItem) => {
       to={`/ingredients/${ingredientId}`}
       state={{ ingredientPage: location }}
       className={styles.link}
+      data-cy={`ingredient-${ingredientType !== 'bun' ? 'filling' : 'bun'}`}
     >
       <div className={styles.item} ref={dragRef} style={{ opacity }}>
         <Counter

@@ -32,6 +32,7 @@ export const HeaderTab = ({ type }: Tab) => {
       className={({ isActive }) =>
         isActive ? `${styles.linkPrimary}` : `${styles.linkSecondary}`
       }
+      data-cy={`tab-${type.name}`}
     >
       <div className={styles.block}>
         <Icon type={state ? ICON_TYPES.primary : ICON_TYPES.secondary} />

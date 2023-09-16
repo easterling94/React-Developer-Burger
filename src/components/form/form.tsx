@@ -43,6 +43,7 @@ export const Form = ({ title, inputs, buttonTitle, hints }: TForm) => {
             placeholder={input.placeholder}
             onChange={onChange}
             extraClass={styles.input}
+            data-cy='input-password'
           />
         ) : (
           <Input
@@ -53,6 +54,7 @@ export const Form = ({ title, inputs, buttonTitle, hints }: TForm) => {
             placeholder={input.placeholder}
             onChange={onChange}
             extraClass={styles.input}
+            data-cy={`input-${input.name}`}
           />
         )
       )}
@@ -61,6 +63,7 @@ export const Form = ({ title, inputs, buttonTitle, hints }: TForm) => {
         type='primary'
         size='medium'
         extraClass={styles.button}
+        data-cy='submit-form'
       >
         {buttonTitle}
       </Button>

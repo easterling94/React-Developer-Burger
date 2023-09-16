@@ -24,7 +24,11 @@ export function BurgerFilling() {
     ? orderIngredients.filter((el) => el.type !== 'bun')
     : null;
   return (
-    <div ref={dropTarget} className={styles.ingredientsFilling}>
+    <div
+      ref={dropTarget}
+      className={styles.ingredientsFilling}
+      data-cy='drop-area-filling'
+    >
       {filling && filling.length ? (
         filling.map((item, index) => (
           <OrderedIngredient key={item.uuid} index={index} item={item} />
