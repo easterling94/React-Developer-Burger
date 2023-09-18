@@ -7,6 +7,7 @@ import { useAppSelector } from '../../../store/store';
 import { OrderFeed } from '../../../utils/sharedTypes';
 import { usePrepareOrderFeed } from '../../../hooks/usePrepareOrderFeed';
 import styles from './order-history.module.scss';
+import { LoaderAnimation } from '../../loader/loader-animation';
 
 export const OrderHistory = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export const OrderHistory = () => {
       <div className={styles.itemsList}>
         {orderIngredients.map((el, i) => (
           <div key={i} className={styles.container}>
-            <div className={styles.containerInfo}>
+            <div>
               <div className={styles.imageBorder}>
                 <img
                   src={images[i].source}
@@ -34,8 +35,8 @@ export const OrderHistory = () => {
                   className={styles.image}
                 ></img>
               </div>
-              <p className={styles.ingredientName}>{el.name}</p>
             </div>
+            <p className={styles.ingredientName}>{el.name}</p>
             <div className={styles.price}>
               <p className={styles.totalPrice}>
                 {el.type === 'bun' ? '2 x ' : '1 x '}
@@ -57,6 +58,8 @@ export const OrderHistory = () => {
       </div>
     </div>
   ) : (
-    <>НЕТ</>
+    <div className={styles.card} onClick={(e) => e.stopPropagation()}>
+      <LoaderAnimation />
+    </div>
   );
 };
