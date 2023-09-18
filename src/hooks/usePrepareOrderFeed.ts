@@ -4,6 +4,7 @@ import { OrderFeed, Ingretient, OrderImages } from '../utils/sharedTypes';
 
 export const usePrepareOrderFeed = (order: OrderFeed) => {
   const data = useAppSelector(store => store.ingredients.ingredients);
+  order = {...order, ingredients: order.ingredients.filter(el => el !== null)}
   const standartBun = data!.filter(el => el.type === 'bun')[0];
   if (order) {
     const putStandartBun = () => {
